@@ -23,12 +23,12 @@
                             data-original-title="You currently have 290 Reward points to spend"><i
                                 class="fa fa-award text-md"></i>&nbsp;1/11/2020</a></div>
                     <div class="author-card-profile">
-                        <div class="author-card-avatar"><img src="./img/images.png"
+                        <div class="author-card-avatar"><img src="${DetailUser.getImg()}"
                                 alt="Daniel Adams">
                         </div>
                         <div class="author-card-details">
-                            <h5 class="author-card-name text-lg">Huy Tran</h5>
-                            <span class="author-card-position">ID:123456789</span>
+                            <h5 class="author-card-name text-lg">${DetailUser.getName()}</h5>
+                            <span class="author-card-position">ID:${DetailUser.getId()}</span>
                         </div>
                     </div>
                 </div>
@@ -56,42 +56,41 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="account-fn">Full name</label>
-                                <input class="form-control" type="text" id="account-fn"  required="">
+                                <input class="form-control" type="text" id="account-fn"  required value="${DetailUser.getName()}">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="account-ln">Date create</label>
-                                <input class="form-control" type="text" id="account-ln" required="" disabled>
+                                <input class="form-control" type="text" id="account-ln" required="" disabled value="${DetailUser.getResgisterDate()}">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="account-email">E-mail address</label>
-                                <input class="form-control" type="email" id="account-email" 
-                                    disabled="">
+                                <input class="form-control" type="text" id="account-email"  value="${DetailUser.getEmail()}"
+                                    disabled> 
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="account-phone">Phone number</label>
-                                <input class="form-control" type="text" id="account-phone" value="09123456798"
-                                    required="">
+                                <input class="form-control" type="text" id="account-phone" value="${DetailUser.getPhone()}" >
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="account-pass">Password</label>
-                                <input class="form-control" type="password" id="account-pass">
+                                <input class="form-control" type="text" id="account-pass" value="${DetailUser.getPass()}" >
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="account-confirm-pass">Position</label>
-                                <select name="Position" id="Position" class="form-control">
-                                    <option value="1">Admin</option>
-                                    <option value="2">User</option>                             
-                                  </select>
+                                <select name="Position" id="Position" class="form-control"  >
+                                    <option ${DetailUser.getType()==1?'selected="selected"':""} value="1">Admin</option>
+                                    <option ${DetailUser.getType()==2?'selected="selected"':""} value="2">User</option>                             
+                                 </select>
                             </div>
                         </div>
                         <div class="col-md-12 container">

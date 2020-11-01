@@ -55,7 +55,7 @@ public class ManageUserServlet extends HttpServlet {
 		case "/ManageUserServlet/show": {
 			ShowlistUser(request, response);
 			break;
-		}
+		}		
 		case "/ManageUserServlet/detail":{
 			ShowDetailUser(request, response);
 			break;
@@ -89,8 +89,8 @@ public class ManageUserServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		String ID = request.getParameter("ID");
-		ArrayList<UserDTO> listUser = (ArrayList<UserDTO>) session.getAttribute("ListUser");
-		UserDTO detailUser = findUserbyID(ID, listUser);
+		ArrayList<UserDTO> listUser = getlistUser();
+		UserDTO detailUser = findUserbyID(ID, listUser);		
 		session.setAttribute("DetailUser", detailUser);
 		response.sendRedirect("../ProjectADpage/userform.jsp");
 	}

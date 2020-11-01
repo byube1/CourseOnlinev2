@@ -324,7 +324,7 @@
 												<td>${User.getResgisterDate()}</td>
 												<td>
 													<div class="Option">
-														<a class="m-2" href="../ManageUserServlet/detail"><i
+														<a class="m-2" href="../ManageUserServlet/detail?ID=${User.getId()}"><i
 															class="fa fa-edit fa-lg"></i></a> 
 														<a class="m-2" href="#"><i
 															class="fa fa-times fa-lg"></i></a>
