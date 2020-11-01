@@ -71,7 +71,7 @@
 
 			<!-- Nav Item - Manage User -->
 			<li class="nav-item active"><a class="nav-link"
-				href="userTB.html"> <i class="far fa-user"></i> <span>Manage
+				href="userTB.jsp"> <i class="far fa-user"></i> <span>Manage
 						User</span></a></li>
 
 			<!-- Nav Item - Manage Course -->

@@ -17,7 +17,7 @@ import dto.UserDTO;
 /**
  * Servlet implementation class ManageUserServlet
  */
-@WebServlet(urlPatterns = {"/ManageUserServlet","/ManageUserServlet/show","/ManageUserServlet/detail"})
+@WebServlet(urlPatterns = {"/ManageUserServlet","/ManageUserServlet/show","/ManageUserServlet/detail","/ManageUserServlet/update"})
 public class ManageUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -60,8 +60,8 @@ public class ManageUserServlet extends HttpServlet {
 			ShowDetailUser(request, response);
 			break;
 		}
-		case "/CRUDservlet/edit":{
-			
+		case "/ManageUserServlet/update":{
+			Update(request, response);
 			break;
 		}
 		default:
@@ -93,6 +93,28 @@ public class ManageUserServlet extends HttpServlet {
 		UserDTO detailUser = findUserbyID(ID, listUser);		
 		session.setAttribute("DetailUser", detailUser);
 		response.sendRedirect("../ProjectADpage/userform.jsp");
+	}
+	
+	protected void Update(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		String id = request.getParameter("id");
+		String name = request.getParameter("name");
+		String pass = request.getParameter("pass");
+		String phone = request.getParameter("phone");
+		String img = request.getParameter("img");
+		int type = Integer.parseInt(request.getParameter("type"));
+		
+		HttpSession session = request.getSession();
+		UserDAO handleUpdate = new UserDAO();
+		try {
+			handleUpdate.updateUser(id, name, pass, phone, type, img);
+			session.setAttribute("Report", "Successfully");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			session.setAttribute("Report", "Cannot update, try again!!");
+			e.printStackTrace();
+		}				
+		response.sendRedirect("detail?ID="+id);
 	}
 
 }

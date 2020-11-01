@@ -61,6 +61,24 @@ public class UserDAO {
 		return listUser;
 	}
 	
+	public int updateUser(String id,String name,String pass,String phone,int type,String img) throws SQLException {
+		Connection cn = myConnection.makeConnection();
+		int result=0;
+		if(cn!=null) {
+			String sql = "UPDATE dbo.UserInformation SET name = ?,pass =?,type =?,imgUrl=?,phone=? WHERE userID = ?";			
+			PreparedStatement pst = cn.prepareStatement(sql);			
+			pst.setString(1,name);
+			pst.setString(2, pass);
+			pst.setInt(3, type);			
+			pst.setString(4, img);
+			pst.setString(5,phone);
+			pst.setString(6,id);
+			result=pst.executeUpdate();
+			cn.close();			
+		}
+		return result;
+	}
+	
 	
 	
 //	public static void main(String[] args) {

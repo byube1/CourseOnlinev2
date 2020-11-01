@@ -38,7 +38,7 @@
                             <i class="fe-icon-user text-muted"></i>
                              Profile Settings
                         </a>
-                        <a class="list-group-item" href="userTB.jsp">
+                        <a class="list-group-item" href="../ManageUserServlet/show">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
                                     <i class="fa fa-door-open"></i>
@@ -51,46 +51,58 @@
             </div>
             <!-- Profile Settings-->
             <div class="col-lg-8 pb-5">
+            
                 <div class="bgform container py-5">
-                    <form class="row">
+                <h5 style="text-align: center; color: red;">${Report==nul?"":Report}</h5>
+                <%session.removeValue("Report"); %>
+                
+                    <form class="row" action="../ManageUserServlet/update" method="get">
+                         <input class="form-control" type="text" id="account-fn" name="id" hidden="" required value="${DetailUser.getId()}">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="account-fn">Full name</label>
-                                <input class="form-control" type="text" id="account-fn"  required value="${DetailUser.getName()}">
+                                <input class="form-control" type="text" id="account-fn" name="name" required value="${DetailUser.getName()}">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="account-ln">Date create</label>
                                 <input class="form-control" type="text" id="account-ln" required="" disabled value="${DetailUser.getResgisterDate()}">
+                                <input class="form-control" type="text" id="account-ln"  hidden="" name="registerDate" value="${DetailUser.getResgisterDate()}">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="account-email">E-mail address</label>
-                                <input class="form-control" type="text" id="account-email"  value="${DetailUser.getEmail()}"
-                                    disabled> 
+                                <input class="form-control" type="text" id="account-email"  value="${DetailUser.getEmail()}" disabled> 
+                                <input class="form-control" type="text" id="account-email" hidden="" name="email"  value="${DetailUser.getEmail()}" >
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="account-phone">Phone number</label>
-                                <input class="form-control" type="text" id="account-phone" value="${DetailUser.getPhone()}" >
+                                <input class="form-control" type="text" id="account-phone" name="phone" value="${DetailUser.getPhone()}" >
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="account-pass">Password</label>
-                                <input class="form-control" type="text" id="account-pass" value="${DetailUser.getPass()}" >
+                                <input class="form-control" type="text" id="account-pass" name="pass" value="${DetailUser.getPass()}" >
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="account-confirm-pass">Position</label>
-                                <select name="Position" id="Position" class="form-control"  >
+                                <select name="type" id="Position" class="form-control">
                                     <option ${DetailUser.getType()==1?'selected="selected"':""} value="1">Admin</option>
                                     <option ${DetailUser.getType()==2?'selected="selected"':""} value="2">User</option>                             
                                  </select>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="account-pass">URL IMG</label>
+                                <input class="form-control" type="text" id="account-pass" name="img" value="${DetailUser.getImg()}" >
                             </div>
                         </div>
                         <div class="col-md-12 container">
@@ -122,10 +134,7 @@
                             <hr class="mt-2 mb-3">
                             <div class="d-flex flex-wrap justify-content-between align-items-center">
                                 
-                                <button class="btn btn-style-1 btn-primary" type="button" data-toast=""
-                                    data-toast-position="topRight" data-toast-type="success"
-                                    data-toast-icon="fe-icon-check-circle" data-toast-title="Success!"
-                                    data-toast-message="Your profile updated successfuly.">Update Profile</button>
+                                <button class="btn btn-style-1 btn-primary" type="submit" >Update Profile</button>
                             </div>
                         </div>
                     </form>
@@ -133,9 +142,7 @@
                
             </div>
         </div>
-    </div>
-
-    
+    </div>   
 </body>
 
 </html>
