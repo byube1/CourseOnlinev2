@@ -45,7 +45,6 @@ public class LoginServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		String email =request.getParameter("email");
 		String pass = request.getParameter("pass");
-		System.out.println(email);
 		if(valid.checkformatEmail(email)) {
 			UserLogin(email, pass, request, response);
 		}
@@ -61,7 +60,7 @@ public class LoginServlet extends HttpServlet {
             UserDAO handleLogin = new UserDAO();		
 		try {
 			UserDTO user = handleLogin.Login(email, pass);
-			if(user.getName()==null) {
+			if(user.getName()==null&&user.getType()==2) {
 				session.setAttribute("Error", "Invalid login or password. Please try again.");
 				response.sendRedirect("ProjectADpage/Login.jsp");
 			}

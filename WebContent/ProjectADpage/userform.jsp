@@ -38,7 +38,7 @@
                             <i class="fe-icon-user text-muted"></i>
                              Profile Settings
                         </a>
-                        <a class="list-group-item" href="userTB.html">
+                        <a class="list-group-item" href="userTB.jsp">
                             <div class="d-flex justify-content-between align-items-center">
                                 <div>
                                     <i class="fa fa-door-open"></i>

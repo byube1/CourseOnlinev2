@@ -57,7 +57,7 @@
 
       <!-- Nav Item - Manage User -->
       <li class="nav-item">
-        <a class="nav-link" href="userTB.jsp">
+        <a class="nav-link" href="../ManageUserServlet/show">
           <i class="far fa-user"></i>
           <span>Manage User</span></a>
       </li>
