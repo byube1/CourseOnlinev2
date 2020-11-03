@@ -18,7 +18,7 @@ import dto.CourseDTO;
 /**
  * Servlet implementation class ManageCourseServlet
  */
-@WebServlet(urlPatterns = {"/ManageCourseServlet","/ManageCourseServlet/show"})
+@WebServlet(urlPatterns = {"/ManageCourseServlet","/ManageCourseServlet/show","/ManageCourseServlet/detail"})
 public class ManageCourseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -60,8 +60,8 @@ public class ManageCourseServlet extends HttpServlet {
 	                ShowListCourse(request, response);
 	                break;
 	            }
-	            case "/ManageUserServlet/detail": {
-	              
+	            case "/ManageCourseServlet/detail": {
+	            	ShowDetailCourse(request, response);	              
 	                break;
 	            }
 	            case "/ManageUserServlet/update": {
@@ -91,6 +91,16 @@ public class ManageCourseServlet extends HttpServlet {
 		 ArrayList<CourseDTO> listCourse = getListCourse();
 		 session.setAttribute("listCourse", listCourse);		
 		 response.sendRedirect("../ProjectADpage/courseTB.jsp");		
+	}
+	
+	protected void ShowDetailCourse(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		 HttpSession session = request.getSession();
+		 String ID = request.getParameter("IDcourse");
+		 ArrayList<CourseDTO> listCourse = getListCourse();
+		 CourseDTO thisCourse = findCourseByID(ID, listCourse);
+		 session.setAttribute("CourseDetail", thisCourse);		 		 
+		 response.sendRedirect("../ProjectADpage/courseform.jsp");		
 	}
 
 }

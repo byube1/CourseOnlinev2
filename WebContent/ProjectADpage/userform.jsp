@@ -96,7 +96,7 @@
                                 <select name="type" id="Position" class="form-control">
                                     <option ${DetailUser.getType()==1?'selected="selected"':""} value="1">Admin</option>
                                     <option ${DetailUser.getType()==2?'selected="selected"':""} value="2">User</option>                             
-                                 </select>
+                                 </select>                              
                             </div>
                         </div>
                         <div class="col-md-12">

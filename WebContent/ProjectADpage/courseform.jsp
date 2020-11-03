@@ -25,43 +25,44 @@
                                         <h3 class="h3 font-weight-bold text-theme text-center">Manage course</h3>
                                     </div>
                                     <form class="row">
-                                        <div class="form-group mb-2 col-6">
+                                        <div class="form-group mb-2 col-12">
                                             <label for="exampleInputPassword1">Name</label>
-                                            <input type="text" class="form-control" id="">
+                                            <input type="text" class="form-control" id="" name="CourseName" value="${CourseDetail.getCourseName()}">
                                         </div>
-                                        <div class="form-group mb-2 col-6">
+                                        <div class="form-group mb-2 col-12">
                                             <label for="exampleInputPassword1">Majors</label>
                                             <select name="Majors" id="Majors" class="form-control">
-                                                <option value="1">Information technology</option>
-                                                <option value="2">Business</option> 
-                                                <option value="3">Other</option> 
+                                                <option ${CourseDetail.getCategoryID() == 'FA234'?'selected="selected"':""} value="FA234">Finace &Accounting</option>
+                                                <option ${CourseDetail.getCategoryID() == 'PD209'?'selected="selected"':""} value="PD209">Personal Development</option> 
+                                                <option ${CourseDetail.getCategoryID() == 'DEV201'?'selected="selected"':""} value="DEV201">Development</option>  
                                               </select>
+                                               
                                         </div>
                                         <div class="form-group mb-2 col-12">
                                             <label for="exampleInputPassword1">Description</label>
-                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="Desc">${CourseDetail.getCourseDescription()}</textarea>
                                         </div>        
                                         <div class="form-group col-12">
                                             <label for="exampleInputEmail1">Url img</label>
-                                            <input type="text" class="form-control" id="">
+                                            <input type="text" class="form-control" id="" name="IMG" value="${CourseDetail.getImg()}">
                                         </div>  
                                         <div class="form-group col-12">
                                             <label for="exampleInputEmail1">Price</label>
-                                            <input type="number" class="form-control" id="">
+                                            <input type="number" class="form-control" id="" name="Price" value="${CourseDetail.getCoursePrice()}">
                                         </div>  
                                         <div class="col-12 ">
-                                            <button type="submit" class="btn btn-theme float-right">Submit</button>
+                                            <button type="submit" class="btn btn-theme float-right">Update</button>
                                         </div>                                                                                                                                                 
                                     </form>
                                 </div>
                             </div>
                             <div class="col-lg-4 d-none d-lg-inline-block">                    
                                 <div class="card" style="width: 18rem;">
-                                    <img class="card-img-top" src="./img/coursePY.png" alt="Card image cap">
+                                    <img class="card-img-top" src="${CourseDetail.getImg()}" alt="Card image cap">
                                     <div class="card-body">
-                                      <p class="card-text"><b>ID:</b>  </p>
-                                      <p class="card-text"><b>Date create:</b> </p>
-                                      <p class="card-text"><b>Number of people registered:</b> </p>
+                                      <p class="card-text"><b>ID: </b>${CourseDetail.getCourseID() }  </p>
+                                      <p class="card-text"><b>Date create: </b>${CourseDetail.getCourseTime() } </p>
+                                      <p class="card-text"><b>Number of people registered:</b>${CourseDetail.getNumberOfStudent() }</p>
                                     </div>
                                   </div>
                             </div>

@@ -312,7 +312,7 @@
                       <td>${Course.getCoursePrice()}$</td>
                       <td>
                         <div class="Option">
-                          <a class="m-2" href="courseform.jsp"><i class="fa fa-edit fa-lg"></i></a>
+                          <a class="m-2" href="../ManageCourseServlet/detail?IDcourse=${Course.getCourseID()}"><i class="fa fa-edit fa-lg"></i></a>
                           <a class="m-2" href="#"><i class="fa fa-times fa-lg"></i></a>
                         </div>                                             
                       </td>
