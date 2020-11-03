@@ -76,7 +76,7 @@
 
 			<!-- Nav Item - Manage Course -->
 
-			<li class="nav-item"><a class="nav-link" href="courseTB.html">
+			<li class="nav-item"><a class="nav-link" href="courseTB.jsp">
 					<i class="fas fa-fw fa-table"></i> <span>Manage Course</span>
 			</a></li>
 
@@ -326,7 +326,7 @@
 													<div class="Option">
 														<a class="m-2" href="../ManageUserServlet/detail?ID=${User.getId()}"><i
 															class="fa fa-edit fa-lg"></i></a> 
-														<a class="m-2" href="#"><i
+														<a class="m-2" href="../ManageUserServlet/delete?ID=${User.getId()}"><i
 															class="fa fa-times fa-lg"></i></a>
 													</div>
 												</td>

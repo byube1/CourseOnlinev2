@@ -13,11 +13,13 @@ import javax.servlet.http.HttpSession;
 
 import dao.UserDAO;
 import dto.UserDTO;
+import validation.valid;
 
 /**
  * Servlet implementation class ManageUserServlet
  */
-@WebServlet(urlPatterns = {"/ManageUserServlet", "/ManageUserServlet/show", "/ManageUserServlet/detail", "/ManageUserServlet/update"})
+@WebServlet(urlPatterns = {"/ManageUserServlet", "/ManageUserServlet/show", "/ManageUserServlet/detail",
+		                   "/ManageUserServlet/update","/ManageUserServlet/delete"})
 public class ManageUserServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
@@ -66,6 +68,9 @@ public class ManageUserServlet extends HttpServlet {
                 Update(request, response);
                 break;
             }
+            case "/ManageUserServlet/delete":{
+            	DeleteUser(request, response);
+            }           
             default:
                 break;
         }
@@ -106,6 +111,11 @@ public class ManageUserServlet extends HttpServlet {
         String phone = request.getParameter("phone");
         String img = request.getParameter("img");
         int type = Integer.parseInt(request.getParameter("type"));
+        
+//        Check valib
+        
+     
+//        return client
 
         HttpSession session = request.getSession();
         UserDAO handleUpdate = new UserDAO();
@@ -118,6 +128,20 @@ public class ManageUserServlet extends HttpServlet {
             e.printStackTrace();
         }
         response.sendRedirect("detail?ID=" + id);
+    }
+    
+    protected void DeleteUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // TODO Auto-generated method stub
+    	String id = request.getParameter("ID");
+    	UserDAO handleDelete = new UserDAO();    	  	
+    	try {
+			handleDelete.deleteUser(id);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	 response.sendRedirect("show");
+    	
     }
 
 }

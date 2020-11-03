@@ -7,5 +7,12 @@ public class valid {
 		}
 		return false;
 	}
+	
+	public static boolean checkLengthText(String text,int maxlenght) {
+		if(text.length()<=maxlenght) {
+			return true;
+		}
+		return false;
+	}
 
 }

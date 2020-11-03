@@ -32,7 +32,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.jsp">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
@@ -60,7 +60,7 @@
 
       <!-- Nav Item - Manage User -->
       <li class="nav-item">
-        <a class="nav-link" href="userTB.html">
+        <a class="nav-link" href="userTB.jsp">
           <i class="far fa-user"></i>
           <span>Manage User</span></a>
       </li>
@@ -68,7 +68,7 @@
       <!-- Nav Item - Manage Course -->
 
       <li class="nav-item active">
-        <a class="nav-link" href="courseTB.html">
+        <a class="nav-link" href="courseTB.jsp">
           <i class="fas fa-fw fa-table"></i>
           <span>Manage Course</span></a>
       </li>

@@ -97,6 +97,22 @@ public class UserDAO {
         }
         return result;
     }
+    
+    public static int deleteUser(String Code) throws SQLException {
+		Connection cn = myConnection.makeConnection();
+		int result=0;
+		if(cn!=null) {
+			String sql = "DELETE dbo.UserInformation WHERE userID = ?";			
+			PreparedStatement pst = cn.prepareStatement(sql);		
+			pst.setString(1,Code);
+			result=pst.executeUpdate();
+			cn.close();			
+		}
+		cn.close();
+		return result;
+	}
+    
+    
 
 //	public static void main(String[] args) {
 //		try {
