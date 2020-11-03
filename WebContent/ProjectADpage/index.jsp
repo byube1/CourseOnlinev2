@@ -65,7 +65,7 @@
       <!-- Nav Item - Manage Course -->
 
       <li class="nav-item">
-        <a class="nav-link" href="courseTB.html">
+        <a class="nav-link" href="../ManageCourseServlet/show">
           <i class="fas fa-fw fa-table"></i>
           <span>Manage Course</span></a>
       </li>

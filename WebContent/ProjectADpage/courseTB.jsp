@@ -1,3 +1,5 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,7 +46,7 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="index.jsp">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
@@ -278,36 +280,44 @@
               <h6 class="m-0 font-weight-bold text-primary">Manage course</h6>
               <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#addcourse">Add course</button>
             </div>
-            <div class="card-body">
+            <div class="card-body">         
               <div class="table-responsive">
                 <table class="table table-hover" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>Name</th>
-                      <th>Position</th>
-                      <th>Office</th>
-                      <th>Age</th>
-                      <th>Start date</th>
-                      <th>Salary</th>
+                      <th>Course ID</th>
+                      <th>Course Name</th>
+                      <th>Major</th>
+                      <th>Description</th>
+                      <th>Date create</th>
+                      <th>Price</th>
                       <th>Option</th>
                     </tr>
                   </thead>
 
                   <tbody>
+                  <c:forEach var="Course" items="${listCourse}">                                
                     <tr>
-                      <td>Tiger Nixon</td>
-                      <td>System Architect</td>
-                      <td>Edinburgh</td>
-                      <td>61</td>
-                      <td>2011/04/25</td>
-                      <td>$320,800</td>
+                      <td>${Course.getCourseID()}</td>
+                      <td>
+                      <c:set var = "name" value = "${fn:substring(Course.getCourseName(),0,20)}" />
+                      ${name}...
+                      </td>
+                      <td>${Course.getCategoryName()}</td>
+                      <td>
+                      <c:set var = "desc" value = "${fn:substring(Course.getCourseDescription(),0,40)}" />
+                      ${desc}...
+                      </td>
+                      <td>${Course.getCourseTime()}</td>
+                      <td>${Course.getCoursePrice()}$</td>
                       <td>
                         <div class="Option">
-                          <a class="m-2" href="courseform.html"><i class="fa fa-edit fa-lg"></i></a>
+                          <a class="m-2" href="courseform.jsp"><i class="fa fa-edit fa-lg"></i></a>
                           <a class="m-2" href="#"><i class="fa fa-times fa-lg"></i></a>
                         </div>                                             
                       </td>
-                    </tr>             
+                    </tr>                      
+                    </c:forEach>            
                   </tbody>
                 </table>
               </div>
@@ -374,10 +384,7 @@
         <form action="">
           <!-- INPUT -->
           <div class="modal-body">
-            <div class="form-group">
-              <label for="exampleInputEmail1">ID course</label>
-              <input type="text" class="form-control" id="">
-          </div>
+            
           <div class="form-group mb-2">
               <label for="exampleInputPassword1">Name</label>
               <input type="text" class="form-control" id="">
@@ -397,7 +404,11 @@
           <div class="form-group">
               <label for="exampleInputEmail1">Url img</label>
               <input type="text" class="form-control" id="">
-          </div>                                         
+          </div>   
+          <div class="form-group">
+              <label for="exampleInputEmail1">Price</label>
+              <input type="number" class="form-control" id="">
+          </div>                                      
          
 
     
@@ -407,8 +418,9 @@
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <button type="button" class="btn btn-primary">Save changes</button>
           </div>
-
         </form>
+
+
        
       </div>
     </div>
