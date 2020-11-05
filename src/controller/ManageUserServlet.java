@@ -42,6 +42,17 @@ public class ManageUserServlet extends HttpServlet {
         }
         return listUser;
     }
+    
+    protected ArrayList<UserDTO> getlistUser(String Email) {
+        ArrayList<UserDTO> listUser = null;
+        try {
+            listUser = UserDAO.GetAllUserv2(Email);
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return listUser;
+    }
 
     protected UserDTO findUserbyID(String ID, ArrayList<UserDTO> dataUser) {
         UserDTO thisUser = dataUser.stream().filter(ac -> ac.getId().equals(ID)).findFirst().orElse(null);
@@ -88,7 +99,10 @@ public class ManageUserServlet extends HttpServlet {
     protected void ShowlistUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
         HttpSession session = request.getSession();
-        ArrayList<UserDTO> listUser = getlistUser();
+        
+        UserDTO user = (UserDTO) session.getAttribute("User");
+        
+        ArrayList<UserDTO> listUser = getlistUser(user.getEmail());
         session.setAttribute("ListUser", listUser);
         response.sendRedirect("../ProjectADpage/userTB.jsp");
     }
