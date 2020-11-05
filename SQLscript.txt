@@ -1,0 +1,197 @@
+USE [master]
+GO
+/****** Object:  Database [AssignmentJavaWeb]    Script Date: 11/3/2020 9:04:58 PM ******/
+CREATE DATABASE [AssignmentJavaWeb]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'AssignmentJavaWeb', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL12.MSSQLSERVER\MSSQL\DATA\AssignmentJavaWeb.mdf' , SIZE = 3264KB , MAXSIZE = UNLIMITED, FILEGROWTH = 1024KB )
+ LOG ON 
+( NAME = N'AssignmentJavaWeb_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL12.MSSQLSERVER\MSSQL\DATA\AssignmentJavaWeb_log.ldf' , SIZE = 816KB , MAXSIZE = 2048GB , FILEGROWTH = 10%)
+GO
+ALTER DATABASE [AssignmentJavaWeb] SET COMPATIBILITY_LEVEL = 120
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [AssignmentJavaWeb].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [AssignmentJavaWeb] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [AssignmentJavaWeb] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [AssignmentJavaWeb] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [AssignmentJavaWeb] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [AssignmentJavaWeb] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [AssignmentJavaWeb] SET AUTO_CLOSE OFF 
+GO
+ALTER DATABASE [AssignmentJavaWeb] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [AssignmentJavaWeb] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [AssignmentJavaWeb] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [AssignmentJavaWeb] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [AssignmentJavaWeb] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [AssignmentJavaWeb] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [AssignmentJavaWeb] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [AssignmentJavaWeb] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [AssignmentJavaWeb] SET  ENABLE_BROKER 
+GO
+ALTER DATABASE [AssignmentJavaWeb] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [AssignmentJavaWeb] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [AssignmentJavaWeb] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [AssignmentJavaWeb] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [AssignmentJavaWeb] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [AssignmentJavaWeb] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [AssignmentJavaWeb] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [AssignmentJavaWeb] SET RECOVERY FULL 
+GO
+ALTER DATABASE [AssignmentJavaWeb] SET  MULTI_USER 
+GO
+ALTER DATABASE [AssignmentJavaWeb] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [AssignmentJavaWeb] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [AssignmentJavaWeb] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [AssignmentJavaWeb] SET TARGET_RECOVERY_TIME = 0 SECONDS 
+GO
+ALTER DATABASE [AssignmentJavaWeb] SET DELAYED_DURABILITY = DISABLED 
+GO
+EXEC sys.sp_db_vardecimal_storage_format N'AssignmentJavaWeb', N'ON'
+GO
+USE [AssignmentJavaWeb]
+GO
+/****** Object:  Table [dbo].[Categories]    Script Date: 11/3/2020 9:04:58 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Categories](
+	[CategoryID] [varchar](10) NOT NULL,
+	[CategoryName] [varchar](2000) NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[CategoryID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[Course]    Script Date: 11/3/2020 9:04:58 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Course](
+	[courseID] [varchar](50) NOT NULL,
+	[CategoryID] [varchar](10) NOT NULL,
+	[courseName] [varchar](300) NOT NULL,
+	[courseTime] [varchar](20) NOT NULL,
+	[certificate] [varchar](300) NULL DEFAULT (NULL),
+	[courseDescription] [varchar](500) NOT NULL,
+	[coursePrice] [float] NOT NULL,
+	[numberOfStudent] [int] NULL,
+	[img] [varchar](2000) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[courseID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[UserInformation]    Script Date: 11/3/2020 9:04:58 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[UserInformation](
+	[userID] [int] IDENTITY(1,1) NOT NULL,
+	[email] [varchar](50) NOT NULL,
+	[pass] [varchar](10) NOT NULL,
+	[name] [varchar](100) NOT NULL,
+	[type] [int] NOT NULL CONSTRAINT [df_type]  DEFAULT ((2)),
+	[status] [varchar](10) NOT NULL CONSTRAINT [df_status]  DEFAULT ('activate'),
+	[imgUrl] [varchar](2000) NULL CONSTRAINT [df_img]  DEFAULT ('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcR5DlNtc68J4LMAwxDTTr6kKQXwBps8HAZzOA&usqp=CAU'),
+	[phone] [varchar](10) NULL,
+	[registerDate] [datetime] NOT NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[email] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+INSERT [dbo].[Categories] ([CategoryID], [CategoryName]) VALUES (N'DEV201', N'Development')
+GO
+INSERT [dbo].[Categories] ([CategoryID], [CategoryName]) VALUES (N'FA234', N'Finace &Accounting')
+GO
+INSERT [dbo].[Categories] ([CategoryID], [CategoryName]) VALUES (N'PD209', N'Personal Development')
+GO
+INSERT [dbo].[Course] ([courseID], [CategoryID], [courseName], [courseTime], [certificate], [courseDescription], [coursePrice], [numberOfStudent], [img]) VALUES (N'BIExcell12', N'FA234', N' Beginner to Pro in Excel: Financial Modeling and Valuation', N'7 month', N'', N'Learn Exell and Financial Modeling like a Professional! Start from the basics ', 25, NULL, N'https://img-a.udemycdn.com/course/240x135/1202988_c73f_20.jpg?ZgaQujLvoMGFf0_1EeW590VTa6b_atoUQfISPZghS86qKSSnEMKGmJCJdoDo5KG_PUVTkGZaqmGdUmRsm3KxhMk80KMmeEQHTDggJXopMrKbhGdhOFRg94SF9s8aV3AGHA ')
+GO
+INSERT [dbo].[Course] ([courseID], [CategoryID], [courseName], [courseTime], [certificate], [courseDescription], [coursePrice], [numberOfStudent], [img]) VALUES (N'BSL', N'PD209', N' Become a SuperLearner', N'7 month', N'Issued by US', N'Master the exact same skills that win World Championships in Memorization - skills  ', 25, NULL, N'https://img-a.udemycdn.com/course/240x135/591930_e9a5_2.jpg?pcJrMCpHtKLmApT5R9ACHeI9UmKQGbvG4AlNOEyyTIjDfvpgtY6dm4MHPiPTPWLRXhHELhRDEU18OicBWsSWpm5PqrYzsoZTIT49CGy5uS5_-10GULVGTsFHQd_87B0 ')
+GO
+INSERT [dbo].[Course] ([courseID], [CategoryID], [courseName], [courseTime], [certificate], [courseDescription], [coursePrice], [numberOfStudent], [img]) VALUES (N'Datas501', N'DEV201', N'Data Science', N'7 month', N'Issued by US', N'Learn Python like a Professional! Start from the basics and go all the way to creating your own applications and games!', 25, NULL, NULL)
+GO
+INSERT [dbo].[Course] ([courseID], [CategoryID], [courseName], [courseTime], [certificate], [courseDescription], [coursePrice], [numberOfStudent], [img]) VALUES (N'FA901', N'FA234', N'The complete finacial analyist', N'5 months', N'Issued by US', N'Excel, Accounting, Financial Statement Analysis, Business Analysis, Financial ', 23, NULL, N'https://img-a.udemycdn.com/course/240x135/328386_6809_11.jpg?DE-TgtfJryTQpxOXnEi2kv2PjU_6wR7uoSqn2HTtflM_VaBTYZ8683lMHLG3rZvD7wYaVGIPr8DQ9tT0BhDk4ne0z64VTBSdMhP-a7FF06RQYZTgtlzkw3vM1MZG7Sqx ')
+GO
+INSERT [dbo].[Course] ([courseID], [CategoryID], [courseName], [courseTime], [certificate], [courseDescription], [coursePrice], [numberOfStudent], [img]) VALUES (N'LifeCoaching', N'PD209', N'Life Coaching Certification Course (Beginner to Advanced)', N'7 month', N'Issued by US', N'Help people to establish goals that naturally motivate them.', 25, NULL, N'https://img-a.udemycdn.com/course/240x135/836842_38ab_4.jpg?23dol7mZb8Ffn03op84EiwruCmJ-fc3A6yb81QzOseveszztgp-fWelO7mD39TyO4guVZaxR5GJlSWQ27c8Le_gZ2OVb4FKiGdDad8zCLEgA6lOtQNXmht5jVtVIw5c')
+GO
+INSERT [dbo].[Course] ([courseID], [CategoryID], [courseName], [courseTime], [certificate], [courseDescription], [coursePrice], [numberOfStudent], [img]) VALUES (N'Neuroplasticity', N'PD209', N'How To Rewire Your Brain', N'5 months', N'Issued by US', N'How to develop mental flexibility, change habits, stop procrastination and alter memories based on neuroscience research', 23, NULL, N'https://img-a.udemycdn.com/course/240x135/328386_6809_11.jpg?DE-TgtfJryTQpxOXnEi2kv2PjU_6wR7uoSqn2HTtflM_VaBTYZ8683lMHLG3rZvD7wYaVGIPr8DQ9tT0BhDk4ne0z64VTBSdMhP-a7FF06RQYZTgtlzkw3vM1MZG7Sqx ')
+GO
+INSERT [dbo].[Course] ([courseID], [CategoryID], [courseName], [courseTime], [certificate], [courseDescription], [coursePrice], [numberOfStudent], [img]) VALUES (N'NLP', N'PD209', N'NLP Practitioner Certification Course (Beginner to Advanced)', N' 5 months', N'Issued by US', N'Break out of unhelpful habits and generate the change you want.', 19, NULL, N'https://img-a.udemycdn.com/course/240x135/328386_6809_11.jpg?DE-TgtfJryTQpxOXnEi2kv2PjU_6wR7uoSqn2HTtflM_VaBTYZ8683lMHLG3rZvD7wYaVGIPr8DQ9tT0BhDk4ne0z64VTBSdMhP-a7FF06RQYZTgtlzkw3vM1MZG7Sqx marketing ')
+GO
+INSERT [dbo].[Course] ([courseID], [CategoryID], [courseName], [courseTime], [certificate], [courseDescription], [coursePrice], [numberOfStudent], [img]) VALUES (N'QWM', N'DEV201', N'Web Development', N' 5 months', N'Issued by US', N'COMPLETELY REDONE The only course you need to learn web development HTML, CSS, JS, Node, and More!', 19, NULL, NULL)
+GO
+INSERT [dbo].[Course] ([courseID], [CategoryID], [courseName], [courseTime], [certificate], [courseDescription], [coursePrice], [numberOfStudent], [img]) VALUES (N'SotfwareT504', N'DEV201', N'Selenium WebDriver', N'5 months', N'Issued by US', N'Selenium WebDriver with Java -Basics to Advanced+Frameworks', 23, NULL, NULL)
+GO
+SET IDENTITY_INSERT [dbo].[UserInformation] ON 
+
+GO
+INSERT [dbo].[UserInformation] ([userID], [email], [pass], [name], [type], [status], [imgUrl], [phone], [registerDate]) VALUES (7, N'ad@gmail.com', N'123', N'Admin', 1, N'activate', N'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSmcWmtBldfDheh-pLN0J-PAlsl0XcakGwYOQ&usqp=CAU', N'1234567', CAST(N'2020-10-10 00:00:00.000' AS DateTime))
+GO
+INSERT [dbo].[UserInformation] ([userID], [email], [pass], [name], [type], [status], [imgUrl], [phone], [registerDate]) VALUES (2, N'hoang1@gmail.com', N'200', N'Huy Hoang', 1, N'activate', N'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcR5DlNtc68J4LMAwxDTTr6kKQXwBps8HAZzOA&usqp=CAU', N'123456', CAST(N'2020-06-24 00:00:00.000' AS DateTime))
+GO
+INSERT [dbo].[UserInformation] ([userID], [email], [pass], [name], [type], [status], [imgUrl], [phone], [registerDate]) VALUES (5, N'huong@gmail.com', N'200', N'quynh huong', 2, N'activate', N'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSmcWmtBldfDheh-pLN0J-PAlsl0XcakGwYOQ&usqp=CAU', N'', CAST(N'2020-06-24 00:00:00.000' AS DateTime))
+GO
+INSERT [dbo].[UserInformation] ([userID], [email], [pass], [name], [type], [status], [imgUrl], [phone], [registerDate]) VALUES (3, N'quynh@gmail.com', N'200', N'ngoc quynh', 2, N'activate', N'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSmcWmtBldfDheh-pLN0J-PAlsl0XcakGwYOQ&usqp=CAU', N'', CAST(N'2020-06-24 00:00:00.000' AS DateTime))
+GO
+SET IDENTITY_INSERT [dbo].[UserInformation] OFF
+GO
+/****** Object:  Index [UQ__UserInfo__CB9A1CDE5DEE2CDD]    Script Date: 11/3/2020 9:04:58 PM ******/
+ALTER TABLE [dbo].[UserInformation] ADD UNIQUE NONCLUSTERED 
+(
+	[userID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+GO
+USE [master]
+GO
+ALTER DATABASE [AssignmentJavaWeb] SET  READ_WRITE 
+GO

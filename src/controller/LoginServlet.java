@@ -61,8 +61,7 @@ public class LoginServlet extends HttpServlet {
             UserDTO user = handleLogin.Login(email, pass);
             if (user.getName() == null || user.getType() != 1) {
                 session.setAttribute("Error", "Invalid login or password. Please try again.");
-					response.sendRedirect("ProjectADpage/Login.jsp");	
-                System.out.println("sai");
+				response.sendRedirect("ProjectADpage/Login.jsp");	             
             } else {
                 session.setAttribute("User", user);
                 response.sendRedirect("ProjectADpage/index.jsp");

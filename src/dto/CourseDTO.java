@@ -11,8 +11,8 @@ package dto;
  */
 public class CourseDTO {
 
-    private String courseID, CategoryID;
-    private String courseName, courseWriter, coursePublising, courseRating, requiment, courseContent, courseTime, certificate, courseDescription;
+    private String courseID, CategoryID,categoryName;
+    private String courseName, courseTime, certificate, courseDescription;
     private double coursePrice;
     private int numberOfStudent;
     private String img;
@@ -20,15 +20,10 @@ public class CourseDTO {
     public CourseDTO() {
     }
 
-    public CourseDTO(String courseID, String CategoryID, String courseName, String courseWriter, String coursePublising, String courseRating, String requiment, String courseContent, String courseTime, String certificate, String courseDescription, double coursePrice, int numberOfStudent, String img) {
+    public CourseDTO(String courseID, String CategoryID, String courseName, String courseTime, String certificate, String courseDescription, double coursePrice, int numberOfStudent, String img) {
         this.courseID = courseID;
         this.CategoryID = CategoryID;
         this.courseName = courseName;
-        this.courseWriter = courseWriter;
-        this.coursePublising = coursePublising;
-        this.courseRating = courseRating;
-        this.requiment = requiment;
-        this.courseContent = courseContent;
         this.courseTime = courseTime;
         this.certificate = certificate;
         this.courseDescription = courseDescription;
@@ -36,8 +31,28 @@ public class CourseDTO {
         this.numberOfStudent = numberOfStudent;
         this.img = img;
     }
+    
+    public CourseDTO(String courseID, String CategoryID, String categoryName,String courseName, String courseTime, String certificate, String courseDescription, double coursePrice, int numberOfStudent, String img) {
+        this.courseID = courseID;
+        this.CategoryID = CategoryID;
+        this.categoryName = categoryName;
+        this.courseName = courseName;
+        this.courseTime = courseTime;
+        this.certificate = certificate;
+        this.courseDescription = courseDescription;
+        this.coursePrice = coursePrice;
+        this.numberOfStudent = numberOfStudent;
+        this.img = img;
+    }
+    public String getCategoryName() {
+		return categoryName;
+	}
 
-    public String getCourseID() {
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
+
+	public String getCourseID() {
         return courseID;
     }
 
@@ -60,47 +75,6 @@ public class CourseDTO {
     public void setCourseName(String courseName) {
         this.courseName = courseName;
     }
-
-    public String getCourseWriter() {
-        return courseWriter;
-    }
-
-    public void setCourseWriter(String courseWriter) {
-        this.courseWriter = courseWriter;
-    }
-
-    public String getCoursePublising() {
-        return coursePublising;
-    }
-
-    public void setCoursePublising(String coursePublising) {
-        this.coursePublising = coursePublising;
-    }
-
-    public String getCourseRating() {
-        return courseRating;
-    }
-
-    public void setCourseRating(String courseRating) {
-        this.courseRating = courseRating;
-    }
-
-    public String getRequiment() {
-        return requiment;
-    }
-
-    public void setRequiment(String requiment) {
-        this.requiment = requiment;
-    }
-
-    public String getCourseContent() {
-        return courseContent;
-    }
-
-    public void setCourseContent(String courseContent) {
-        this.courseContent = courseContent;
-    }
-
     public String getCourseTime() {
         return courseTime;
     }
@@ -148,5 +122,4 @@ public class CourseDTO {
     public void setImg(String img) {
         this.img = img;
     }
-
 }

@@ -76,7 +76,7 @@
 
 			<!-- Nav Item - Manage Course -->
 
-			<li class="nav-item"><a class="nav-link" href="courseTB.html">
+			<li class="nav-item"><a class="nav-link" href="../ManageCourseServlet/show">
 					<i class="fas fa-fw fa-table"></i> <span>Manage Course</span>
 			</a></li>
 
@@ -268,9 +268,10 @@
 							<div
 								class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
 								aria-labelledby="userDropdown">
-								<a class="dropdown-item" href="#"> <i
-									class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Profile
-								</a> </a>
+								 <a class="dropdown-item" href="../ManageUserServlet/detail?ID=${User.getId()}">
+								<i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+								 Profile
+								</a>
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="#" data-toggle="modal"
 									data-target="#logoutModal"> <i
@@ -326,7 +327,7 @@
 													<div class="Option">
 														<a class="m-2" href="../ManageUserServlet/detail?ID=${User.getId()}"><i
 															class="fa fa-edit fa-lg"></i></a> 
-														<a class="m-2" href="#"><i
+														<a class="m-2" href="../ManageUserServlet/delete?ID=${User.getId()}"><i
 															class="fa fa-times fa-lg"></i></a>
 													</div>
 												</td>

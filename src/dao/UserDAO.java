@@ -79,6 +79,33 @@ public class UserDAO {
         }
         return listUser;
     }
+    
+    public static ArrayList<UserDTO> GetAllUserv2(String email) throws SQLException {
+        ArrayList<UserDTO> listUser = new ArrayList<UserDTO>();
+        Connection cn = myConnection.makeConnection();
+        if (cn != null) {
+            String sql = "SELECT * FROM dbo.UserInformation WHERE email <> ?";
+            
+            PreparedStatement pst = cn.prepareStatement(sql);
+            pst.setString(1, email);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                UserDTO thisUser = new UserDTO();
+                thisUser.setId(rs.getString("userID"));
+                thisUser.setEmail(rs.getString("email"));
+                thisUser.setPass(rs.getString("pass"));
+                thisUser.setName(rs.getString("name"));
+                thisUser.setType(rs.getInt("type"));
+                thisUser.setImg(rs.getString("imgUrl"));
+                thisUser.setPhone(rs.getString("phone"));
+                thisUser.setResgisterDate(rs.getString("registerDate"));
+                listUser.add(thisUser);
+            }
+            rs.close();
+            cn.close();
+        }
+        return listUser;
+    }
 
     public int updateUser(String id, String name, String pass, String phone, int type, String img) throws SQLException {
         Connection cn = myConnection.makeConnection();
@@ -97,6 +124,22 @@ public class UserDAO {
         }
         return result;
     }
+    
+    public static int deleteUser(String Code) throws SQLException {
+		Connection cn = myConnection.makeConnection();
+		int result=0;
+		if(cn!=null) {
+			String sql = "DELETE dbo.UserInformation WHERE userID = ?";			
+			PreparedStatement pst = cn.prepareStatement(sql);		
+			pst.setString(1,Code);
+			result=pst.executeUpdate();
+			cn.close();			
+		}
+		cn.close();
+		return result;
+	}
+    
+    
 
  public int insectUser(UserDTO user) throws SQLException {
         Connection cn = myConnection.makeConnection();

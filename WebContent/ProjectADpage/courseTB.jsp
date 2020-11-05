@@ -1,3 +1,5 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,7 +34,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.jsp">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
@@ -44,7 +46,7 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="index.jsp">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
       </li>
@@ -60,7 +62,7 @@
 
       <!-- Nav Item - Manage User -->
       <li class="nav-item">
-        <a class="nav-link" href="userTB.html">
+        <a class="nav-link" href="userTB.jsp">
           <i class="far fa-user"></i>
           <span>Manage User</span></a>
       </li>
@@ -68,7 +70,7 @@
       <!-- Nav Item - Manage Course -->
 
       <li class="nav-item active">
-        <a class="nav-link" href="courseTB.html">
+        <a class="nav-link" href="courseTB.jsp">
           <i class="fas fa-fw fa-table"></i>
           <span>Manage Course</span></a>
       </li>
@@ -243,12 +245,13 @@
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin</span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Hello, ${User.getName()}</span>
+                <img class="img-profile rounded-circle" src="${User.getImg()}">
                 <!-- IMG -->
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="../ManageUserServlet/detail?ID=${User.getId()}">
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                   Profile
                 </a>
@@ -278,36 +281,44 @@
               <h6 class="m-0 font-weight-bold text-primary">Manage course</h6>
               <button type="button" class="btn btn-primary float-right" data-toggle="modal" data-target="#addcourse">Add course</button>
             </div>
-            <div class="card-body">
+            <div class="card-body">         
               <div class="table-responsive">
                 <table class="table table-hover" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>Name</th>
-                      <th>Position</th>
-                      <th>Office</th>
-                      <th>Age</th>
-                      <th>Start date</th>
-                      <th>Salary</th>
+                      <th>Course ID</th>
+                      <th>Course Name</th>
+                      <th>Major</th>
+                      <th>Description</th>
+                      <th>Date create</th>
+                      <th>Price</th>
                       <th>Option</th>
                     </tr>
                   </thead>
 
                   <tbody>
+                  <c:forEach var="Course" items="${listCourse}">                                
                     <tr>
-                      <td>Tiger Nixon</td>
-                      <td>System Architect</td>
-                      <td>Edinburgh</td>
-                      <td>61</td>
-                      <td>2011/04/25</td>
-                      <td>$320,800</td>
+                      <td>${Course.getCourseID()}</td>
+                      <td>
+                      <c:set var = "name" value = "${fn:substring(Course.getCourseName(),0,20)}" />
+                      ${name}...
+                      </td>
+                      <td>${Course.getCategoryName()}</td>
+                      <td>
+                      <c:set var = "desc" value = "${fn:substring(Course.getCourseDescription(),0,40)}" />
+                      ${desc}...
+                      </td>
+                      <td>${Course.getCourseTime()}</td>
+                      <td>${Course.getCoursePrice()}$</td>
                       <td>
                         <div class="Option">
-                          <a class="m-2" href="courseform.html"><i class="fa fa-edit fa-lg"></i></a>
-                          <a class="m-2" href="#"><i class="fa fa-times fa-lg"></i></a>
+                          <a class="m-2" href="../ManageCourseServlet/detail?IDcourse=${Course.getCourseID()}"><i class="fa fa-edit fa-lg"></i></a>
+                          <a class="m-2" href="../ManageCourseServlet/delete?IDcourse=${Course.getCourseID()}"><i class="fa fa-times fa-lg"></i></a>
                         </div>                                             
                       </td>
-                    </tr>             
+                    </tr>                      
+                    </c:forEach>            
                   </tbody>
                 </table>
               </div>
@@ -371,33 +382,34 @@
           </button>
         </div>
 
-        <form action="">
+        <form action="../ManageCourseServlet/add" method="get">
           <!-- INPUT -->
           <div class="modal-body">
-            <div class="form-group">
-              <label for="exampleInputEmail1">ID course</label>
-              <input type="text" class="form-control" id="">
-          </div>
+            
           <div class="form-group mb-2">
               <label for="exampleInputPassword1">Name</label>
-              <input type="text" class="form-control" id="">
+              <input type="text" class="form-control" id="" name="CourseName" required>
           </div>
           <div class="form-group mb-2">
               <label for="exampleInputPassword1">Majors</label>
               <select name="Majors" id="Majors" class="form-control">
-                  <option value="1">Information technology</option>
-                  <option value="2">Business</option> 
-                  <option value="3">Other</option> 
+                  <option value="FA234">Finace & Accounting</option>
+                  <option value="PD209">Personal Development</option> 
+                  <option value="DEV201">Development</option> 
                 </select>
           </div>
           <div class="form-group mb-2">
               <label for="exampleInputPassword1">Description</label>
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="desc"></textarea>
           </div>        
           <div class="form-group">
               <label for="exampleInputEmail1">Url img</label>
-              <input type="text" class="form-control" id="">
-          </div>                                         
+              <input type="text" class="form-control" id="" name="img">
+          </div>   
+          <div class="form-group">
+              <label for="exampleInputEmail1">Price</label>
+              <input type="number" class="form-control" id="" name="price" required>
+          </div>                                      
          
 
     
@@ -405,10 +417,11 @@
           <!-- SUNMIT -->
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
           </div>
-
         </form>
+
+
        
       </div>
     </div>
