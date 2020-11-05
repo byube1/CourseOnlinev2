@@ -14,19 +14,25 @@
 
 <body class="body-course">
     <div id="main-wrapper" class="container mt-4 background-form">
+     
         <div class="row justify-content-center">
+       
             <div class="col-xl-10 m-5">
+             
                 <div class="card border-0">
+               
                     <div class="card-body p-0">
+                    
                         <div class="row no-gutters">
                             <div class="col-lg-8">
                                 <div class="p-5">
                                     <div class="mb-5">
                                         <h3 class="h3 font-weight-bold text-theme text-center">Manage course</h3>
                                     </div>
-                                    <form class="row">
+                                    <form action="../ManageCourseServlet/update" method="get" class="row">
                                         <div class="form-group mb-2 col-12">
                                             <label for="exampleInputPassword1">Name</label>
+                                            <input type="text" hidden name="CourseID" value="${CourseDetail.getCourseID() }">
                                             <input type="text" class="form-control" id="" name="CourseName" value="${CourseDetail.getCourseName()}">
                                         </div>
                                         <div class="form-group mb-2 col-12">
@@ -50,9 +56,13 @@
                                             <label for="exampleInputEmail1">Price</label>
                                             <input type="number" class="form-control" id="" name="Price" value="${CourseDetail.getCoursePrice()}">
                                         </div>  
-                                        <div class="col-12 ">
-                                            <button type="submit" class="btn btn-theme float-right">Update</button>
-                                        </div>                                                                                                                                                 
+                                        <div class="col-9 ">
+                                        <button type="submit" class="btn btn-theme float-right">Update</button>                                                    
+                                        </div>   
+                                         <div class="col-3	 ">
+                                            <button class="btn btn-theme float-left"> <a style="color: white" href="../ManageCourseServlet/show">Back</a></button>                                    
+                                        </div> 
+                                                                                                                                                                                    
                                     </form>
                                 </div>
                             </div>

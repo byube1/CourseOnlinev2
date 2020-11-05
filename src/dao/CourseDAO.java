@@ -58,4 +58,58 @@ public class CourseDAO {
         }
         return lst;
     }
+    
+    public  int updateCourse (String courseID, String courseName, String CategoryID, String courseDescription,double coursePrice,String img) throws SQLException {
+		Connection cn = myConnection.makeConnection();
+		int result=0;
+		if(cn!=null) {
+			String sql = "UPDATE dbo.Course SET courseName = ?, CategoryID = ?, courseDescription = ?, coursePrice = ?, img = ? WHERE courseID = ?";			
+			PreparedStatement pst = cn.prepareStatement(sql);
+			pst.setString(6,courseID);
+			pst.setString(1,courseName);
+			pst.setString(2, CategoryID);
+			pst.setString(3,courseDescription);
+			pst.setDouble(4, coursePrice);
+			pst.setString(5,img);
+			result=pst.executeUpdate();
+			pst.close();
+			cn.close();			
+		}
+		return result;
+	}
+    
+    public  int addCourse(String courseID, String CategoryID, String courseName, String courseTime,String desc,double coursePrice,String img) throws SQLException {
+		Connection cn = myConnection.makeConnection();
+		int result=0;
+		if(cn!=null) {
+			String sql = "INSERT INTO dbo.Course( courseID ,CategoryID ,courseName ,courseTime ,courseDescription ,coursePrice ,img) VALUES ( ?,?,?,?,?,?,?)";			
+			PreparedStatement pst = cn.prepareStatement(sql);
+			pst.setString(1,courseID);
+			pst.setString(2,CategoryID);
+			pst.setString(3, courseName);
+			pst.setString(4, courseTime);
+			pst.setString(5, desc);	
+			pst.setDouble(6, coursePrice);
+			pst.setString(7,img);
+			result=pst.executeUpdate();
+			cn.close();			
+		}		
+		return result;
+	}	
+    
+    public  int deleteCourse(String Code) throws SQLException {
+		Connection cn = myConnection.makeConnection();
+		int result=0;
+		if(cn!=null) {
+			String sql = "DELETE dbo.Course WHERE courseID = ?";			
+			PreparedStatement pst = cn.prepareStatement(sql);		
+			pst.setString(1,Code);
+			result=pst.executeUpdate();
+			cn.close();			
+		}
+		cn.close();
+		return result;
+	}
+    
+    
 }

@@ -313,7 +313,7 @@
                       <td>
                         <div class="Option">
                           <a class="m-2" href="../ManageCourseServlet/detail?IDcourse=${Course.getCourseID()}"><i class="fa fa-edit fa-lg"></i></a>
-                          <a class="m-2" href="#"><i class="fa fa-times fa-lg"></i></a>
+                          <a class="m-2" href="../ManageCourseServlet/delete?IDcourse=${Course.getCourseID()}"><i class="fa fa-times fa-lg"></i></a>
                         </div>                                             
                       </td>
                     </tr>                      
@@ -381,33 +381,33 @@
           </button>
         </div>
 
-        <form action="">
+        <form action="../ManageCourseServlet/add" method="get">
           <!-- INPUT -->
           <div class="modal-body">
             
           <div class="form-group mb-2">
               <label for="exampleInputPassword1">Name</label>
-              <input type="text" class="form-control" id="">
+              <input type="text" class="form-control" id="" name="CourseName" required>
           </div>
           <div class="form-group mb-2">
               <label for="exampleInputPassword1">Majors</label>
               <select name="Majors" id="Majors" class="form-control">
-                  <option value="1">Information technology</option>
-                  <option value="2">Business</option> 
-                  <option value="3">Other</option> 
+                  <option value="FA234">Finace & Accounting</option>
+                  <option value="PD209">Personal Development</option> 
+                  <option value="DEV201">Development</option> 
                 </select>
           </div>
           <div class="form-group mb-2">
               <label for="exampleInputPassword1">Description</label>
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="desc"></textarea>
           </div>        
           <div class="form-group">
               <label for="exampleInputEmail1">Url img</label>
-              <input type="text" class="form-control" id="">
+              <input type="text" class="form-control" id="" name="img">
           </div>   
           <div class="form-group">
               <label for="exampleInputEmail1">Price</label>
-              <input type="number" class="form-control" id="">
+              <input type="number" class="form-control" id="" name="price" required>
           </div>                                      
          
 
@@ -416,7 +416,7 @@
           <!-- SUNMIT -->
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="submit" class="btn btn-primary">Save changes</button>
           </div>
         </form>
 

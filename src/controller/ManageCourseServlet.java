@@ -14,11 +14,13 @@ import javax.servlet.http.HttpSession;
 
 import dao.CourseDAO;
 import dto.CourseDTO;
+import tool.Tool;
 
 /**
  * Servlet implementation class ManageCourseServlet
  */
-@WebServlet(urlPatterns = {"/ManageCourseServlet","/ManageCourseServlet/show","/ManageCourseServlet/detail"})
+@WebServlet(urlPatterns = {"/ManageCourseServlet","/ManageCourseServlet/show","/ManageCourseServlet/detail",
+		                   "/ManageCourseServlet/update", "/ManageCourseServlet/add","/ManageCourseServlet/delete"})
 public class ManageCourseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -64,13 +66,18 @@ public class ManageCourseServlet extends HttpServlet {
 	            	ShowDetailCourse(request, response);	              
 	                break;
 	            }
-	            case "/ManageUserServlet/update": {
-	              
+	            case "/ManageCourseServlet/update": {
+	            	UpdateCourse(request, response);;
 	                break;
 	            }
-	            case "/ManageUserServlet/delete":{
-	            	
-	            }           
+	            case "/ManageCourseServlet/add":{
+	            	AddCourse(request, response);
+	            	break;
+	            } 
+	            case "/ManageCourseServlet/delete":{
+	            	DeleteCourse(request, response);
+	            	break;
+	            }  
 	            default:
 	                break;
 	        }
@@ -101,6 +108,65 @@ public class ManageCourseServlet extends HttpServlet {
 		 CourseDTO thisCourse = findCourseByID(ID, listCourse);
 		 session.setAttribute("CourseDetail", thisCourse);		 		 
 		 response.sendRedirect("../ProjectADpage/courseform.jsp");		
+	}
+	
+	protected void UpdateCourse(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		 HttpSession session = request.getSession();
+		 
+		 String ID = request.getParameter("CourseID");
+		 String Name = request.getParameter("CourseName");
+		 String Category = request.getParameter("Majors");
+		 String Desc = request.getParameter("Desc");
+		 String Img = request.getParameter("IMG");
+		 double price = Double.parseDouble(request.getParameter("Price"));
+		 
+		 CourseDAO handleUpdate = new CourseDAO();
+		 try {
+			handleUpdate.updateCourse(ID, Name, Category, Desc, price, Img);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 response.sendRedirect("detail?IDcourse="+ID);	
+	}
+	
+	protected void AddCourse(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		 HttpSession session = request.getSession();
+		 
+		 String IDcourse = Tool.AutoCreateID("CR");
+		 String CourseName = request.getParameter("CourseName");
+		 String Category =  request.getParameter("Majors");
+		 String Desc = request.getParameter("desc");
+		 String IMG = request.getParameter("img");
+		 double price = Double.parseDouble(request.getParameter("price"));
+		 String RegisterDate = Tool.getTimeNow();
+		 
+		 CourseDAO handleAdd = new CourseDAO();
+		 try {
+			handleAdd.addCourse(IDcourse, Category, CourseName, RegisterDate, Desc, price, IMG);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		 
+		 response.sendRedirect("show");		
+	}
+	
+	protected void DeleteCourse(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		 HttpSession session = request.getSession();
+		
+		 String ID = request.getParameter("IDcourse");
+		 
+		 CourseDAO handleDelete = new CourseDAO();
+		 try {
+			handleDelete.deleteCourse(ID);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		 
+		 response.sendRedirect("show");		
 	}
 
 }
