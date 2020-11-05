@@ -14,8 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import dao.UserDAO;
 import dto.UserDTO;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javax.naming.NamingException;
 import validation.valid;
 
@@ -54,7 +53,6 @@ public class SignInServlet extends HttpServlet {
             } else {
                 session.setAttribute("User", user);
                 CategoryDAO cate = new CategoryDAO();
-
                 session.setAttribute("cloneCATE", cate.GetAllCates());
                 CourseDAO course = new CourseDAO();
                 session.setAttribute("cloneCOURSE", course.getAllCourses());

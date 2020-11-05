@@ -304,9 +304,10 @@ a:hover {
 .shopcart2 {
     position: fixed;
     right: 20px;
-    bottom: 100px;
+    bottom: 120px;
     font-size: 80px;
 }
 .shopcart2 button{
     font-size: 28px;
 }
+

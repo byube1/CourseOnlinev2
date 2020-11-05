@@ -11,30 +11,30 @@ package dto;
  */
 public class CategoryDTO {
 
-    private String CategoryID, CategoryName;
+    private String categoryID, categoryName;
 
     public CategoryDTO() {
     }
 
-    public CategoryDTO(String CategoryID, String CategoryName) {
-        this.CategoryID = CategoryID;
-        this.CategoryName = CategoryName;
+    public CategoryDTO(String categoryID, String categoryName) {
+        this.categoryID = categoryID;
+        this.categoryName = categoryName;
     }
 
     public String getCategoryID() {
-        return CategoryID;
+        return categoryID;
     }
 
-    public void setCategoryID(String CategoryID) {
-        this.CategoryID = CategoryID;
+    public void setCategoryID(String categoryID) {
+        this.categoryID = categoryID;
     }
 
     public String getCategoryName() {
-        return CategoryName;
+        return categoryName;
     }
 
-    public void setCategoryName(String CategoryName) {
-        this.CategoryName = CategoryName;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
 }

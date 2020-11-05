@@ -3,13 +3,12 @@
         <img src="../img1/logo123.png" /></a>
     <div style="float: right;">
         <span class="pr-3" style="font-size: 22px">Hello, ${User.getName()}</span>
-        <!--        <form action="LogoutServlet" >-->
         <button type="button" class="btn btn-danger" value="Logout" >
-            Logout
+            <a href="../SignIn_SignUp.jsp">LOGOUT</a>
+            <%
+                session.removeAttribute("User");
+            %>
         </button>
-        <!--</form>-->
-
-
 
     </div>
 </header>

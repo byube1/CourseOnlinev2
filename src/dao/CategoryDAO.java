@@ -12,6 +12,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
+import javax.naming.NamingException;
 
 /**
  *
@@ -19,25 +21,62 @@ import java.util.ArrayList;
  */
 public class CategoryDAO {
 
-    public ArrayList<CategoryDTO> GetAllCates() throws SQLException {
-        ArrayList<CategoryDTO> list = new ArrayList<>();
-        Connection cn = myConnection.makeConnection();
-        if (cn != null) {
-            String sql = "SELECT [CategoryID]\n"
-                    + "      ,[CategoryName]\n"
-                    + "  FROM [AssignmentJavaWeb].[dbo].[Categories]";
-            PreparedStatement pst = cn.prepareStatement(sql);
-            ResultSet rs = pst.executeQuery();
-            while (rs.next()) {
-                CategoryDTO thisC = new CategoryDTO();
-                thisC.setCategoryID(rs.getString("CategoryID"));
-                thisC.setCategoryName(rs.getString("CategoryName"));
+    private List<CategoryDTO> cate;
 
-                list.add(thisC);
-            }
-            rs.close();
-            cn.close();
+    public CategoryDAO() {
+        try {
+            this.cate = GetAllCates();
+        } catch (Exception e) {
+            e.printStackTrace();;
         }
-        return list;
+    }
+
+    public List<CategoryDTO> findAllCate() {
+        return this.cate;
+    }
+
+    public CategoryDTO find(String id) {
+        for (CategoryDTO cour : this.cate) {
+            if (cour.getCategoryID().equalsIgnoreCase(id)) {
+                return cour;
+            }
+        }
+        return null;
+    }
+
+    public ArrayList<CategoryDTO> GetAllCates() throws NamingException, SQLException {
+        Connection con = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        String sql = "SELECT * FROM [AssignmentJavaWeb].[dbo].[Categories]";
+
+        ArrayList<CategoryDTO> lst = new ArrayList<>();
+
+        try {
+            con = myConnection.makeConnection();
+            if (con != null) {
+                pstm = con.prepareStatement(sql);
+                rs = pstm.executeQuery();
+
+                while (rs.next()) {
+                    String idCate = rs.getString("categoryID");
+                    String name = rs.getString("categoryName");
+
+                    CategoryDTO p = new CategoryDTO(idCate, name);
+                    lst.add(p);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (pstm != null) {
+                pstm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return lst;
     }
 }

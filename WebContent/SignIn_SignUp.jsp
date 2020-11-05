@@ -40,7 +40,7 @@
 
                     <form action="SignUpServlet" class="sign-up-form" method="POST">
                         <h2 class="title">Sign up</h2>
-                      
+
                         <div class="input-field">
                             <i class="fas fa-envelope"></i>
                             <input type="email" placeholder="Email" name="emailU"/>
@@ -49,7 +49,7 @@
                             <i class="fas fa-lock"></i>
                             <input type="password" placeholder="Password" name="passU"/>
                         </div>
-                          <div class="input-field">
+                        <div class="input-field">
                             <i class="fas fa-user"></i>
                             <input type="text" placeholder="Username"  name="nameU"/>
                         </div>

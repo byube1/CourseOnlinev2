@@ -20,7 +20,6 @@
         <%@include file="Carousel.jsp" %>
         <%@include file="HotCourse.jsp" %>
         <%@include file="Course.jsp" %>
-        <%@include file="Cart.jsp" %>
         <%@include file="footer.jsp" %>
 
     </body>

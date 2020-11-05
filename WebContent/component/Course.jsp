@@ -16,18 +16,18 @@
         <section class="showtime">
             <div class="container">
                 <H3 style="text-align: center; margin-top: 20px; color: #03a9f4">COURSE CATEGORIES</H3>
-                <c:forEach var="cates" items="${cloneCATE }">
+                    <c:forEach var="cates" items="${cloneCATE }">
                     <ul class="nav nav-pills">
+
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="pill" href="#${cates.getCategoryID()}">${cates.getCategoryName() } </a>
                         </li>
                     </ul>
-                    <!-- Tab panes -->
-                    <%--<%@include file="Course.jsp" %>--%>
+
                     <div class="tab-content">
-                        <c:forEach var="course" items="${cloneCOURSE }">
-                            <c:if test = "${course.getCategoryID() eq cates.getCategoryID()}">
-                                <div class="tab-pane container active" id="${cates.getCategoryID()}" >
+                        <div class="tab-pane container active" id="${cates.getCategoryID()}" >
+                            <c:forEach var="course" items="${cloneCOURSE }">
+                                <c:if test = "${course.getCategoryID() eq cates.getCategoryID()}">
                                     <div class="row">
                                         <div class="col-md-2">
                                             <img class="fluid" src="${course.getImg()}" alt="" />
@@ -39,21 +39,30 @@
                                                     ${course.getCourseDescription()}
                                                 </p>
                                                 <h1 class="d-block mb-4">${course.getCoursePrice()} $</h1>
-                                                <button class="btn btn-danger">Add to Cart</button>
+                                                <button class="btn btn-danger">
+                                                    <a style="text-decoration: none;color: white"
+                                                       href="${pageContext.request.contextPath }/CartServlet?&action=buy&id=${course.getCourseID() }">
+                                                        ADD TO CART</a>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
                                     <hr />
-
-
-                                </div>
-                            </c:if>
-                        </c:forEach>
+                                </c:if>
+                            </c:forEach>
+                        </div>
                     </div>
-
-
                 </c:forEach>
             </div>
         </section>
+
+        <div class="shopcart2">
+            <a href="${pageContext.request.contextPath }/CartServlet">
+                <button type="button" class="btn btn-success">
+                    <i class="fa fa-shopping-cart"></i>
+                </button>
+            </a>
+        </div>
+
     </body>
 </html>
