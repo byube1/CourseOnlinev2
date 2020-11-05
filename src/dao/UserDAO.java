@@ -98,6 +98,31 @@ public class UserDAO {
         return result;
     }
 
+ public int insectUser(UserDTO user) throws SQLException {
+        Connection cn = myConnection.makeConnection();
+        int result = 0;
+        if (cn != null) {
+            String sql = "INSERT INTO [AssignmentJavaWeb].[dbo].[UserInformation]\n"
+                    + "           ,[email]\n"
+                    + "           ,[pass]\n"
+                    + "           ,[name]\n"
+                    + "           ,[phone]\n"
+                    + "           ,[registerDate])\n"
+                    + "     VALUES\n"
+                    + "           (?,?,?,?,?)";
+            PreparedStatement pst = cn.prepareStatement(sql);
+
+            pst.setString(2, user.getEmail());
+            pst.setString(3, user.getPass());
+            pst.setString(4, user.getName());
+            pst.setString(7, user.getPhone());
+            pst.setString(8, user.getResgisterDate());
+            result = pst.executeUpdate();
+            cn.close();
+        }
+        return result;
+    }
+
 //	public static void main(String[] args) {
 //		try {
 //			ArrayList<UserDTO> listUser = GetAllUser();
