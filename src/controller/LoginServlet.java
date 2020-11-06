@@ -62,7 +62,7 @@ public class LoginServlet extends HttpServlet {
             if (user.getName() == null || user.getType() != 1) {
                 session.setAttribute("Error", "Invalid login or password. Please try again.");
 				response.sendRedirect("ProjectADpage/Login.jsp");	             
-            } else {
+            } else {           	
                 session.setAttribute("User", user);
                 response.sendRedirect("ProjectADpage/index.jsp");
             }
