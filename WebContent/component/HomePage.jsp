@@ -12,7 +12,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Home Page</title>
         <%@include file="header.jsp" %>
-        <link href="../css1/styleB.css" rel="stylesheet" type="text/css"/>
+        <link href="css1/styleB.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
 
@@ -21,6 +21,5 @@
         <%@include file="HotCourse.jsp" %>
         <%@include file="Course.jsp" %>
         <%@include file="footer.jsp" %>
-
     </body>
 </html>

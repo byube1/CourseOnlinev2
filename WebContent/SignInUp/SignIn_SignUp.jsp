@@ -14,14 +14,16 @@
             src="https://kit.fontawesome.com/64d58efce2.js"
             crossorigin="anonymous"
         ></script>
-        <link href="css1/style.css" rel="stylesheet" type="text/css"/>
+        <link href="cssLog/style.css" rel="stylesheet" type="text/css"/>
 
     </head>
     <body>
         <div class="container">
             <div class="forms-container">
                 <div class="signin-signup">
-                    <form action="SignInServlet" class="sign-in-form" method="POST">
+                
+                
+                    <form action="../SignInServlet" class="sign-in-form" method="POST">
                         <h2 class="title">Sign in</h2>
                         <div class="input-field">
                             <i class="fas fa-envelope"></i>
@@ -37,13 +39,14 @@
                         <input type="submit" value="Login" class="btn solid"  />
                     </form>
                     <%session.removeValue("Error");%>
+                    
 
                     <form action="SignUpServlet" class="sign-up-form" method="POST">
                         <h2 class="title">Sign up</h2>
 
                         <div class="input-field">
                             <i class="fas fa-envelope"></i>
-                            <input type="email" placeholder="Email" name="emailU"/>
+                            <input type="email" placeholder="Email" name="emailUser"/>
                         </div>
                         <div class="input-field">
                             <i class="fas fa-lock"></i>
@@ -58,6 +61,8 @@
                         </p>
                         <input type="submit" class="btn" value="Sign up" />
                     </form>
+                    
+                    
                 </div>
             </div>
 

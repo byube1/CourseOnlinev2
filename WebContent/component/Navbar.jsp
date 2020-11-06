@@ -4,10 +4,7 @@
     <div style="float: right;">
         <span class="pr-3" style="font-size: 22px">Hello, ${User.getName()}</span>
         <button type="button" class="btn btn-danger" value="Logout" >
-            <a href="../SignIn_SignUp.jsp">LOGOUT</a>
-            <%
-                session.removeAttribute("User");
-            %>
+            <a href="../SignInUp/SignIn_SignUp.jsp">LOGOUT</a>
         </button>
 
     </div>

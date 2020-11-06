@@ -28,7 +28,6 @@
         </style>
     </head>
     <body>
-
         <div class="container YourCartShopping" >
             <h1 style="text-align: center; margin: 50px 0px;color: white">Your Shopping Cart</h1>
             <table class="table table-bordered table-dark table-striped">
@@ -61,7 +60,7 @@
                                        onclick="return confirm('Are you sure?')">Remove</a>
                                 </button>
                             </td>
-                        </tr>f
+                        </tr>
 
                     </c:forEach>
                 </tbody>

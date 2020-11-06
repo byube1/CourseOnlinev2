@@ -45,7 +45,7 @@ public class CartServlet extends HttpServlet {
     }
 
     protected void displayCart(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("Cart.jsp").forward(request, response);
+        request.getRequestDispatcher("component/Cart.jsp").forward(request, response);
     }
 
     protected void removeItem(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

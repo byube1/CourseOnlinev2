@@ -10,21 +10,20 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dto.UserDTO;
 
 /**
- * Servlet Filter implementation class isLoginRole
+ * Servlet Filter implementation class IsUserLogin
  */
-@WebFilter("/ProjectADpage/*")
-public class IsADLogin implements Filter {
+@WebFilter("/*")
+public class IsUserLogin implements Filter {
 
     /**
      * Default constructor. 
      */
-    public IsADLogin() {
+    public IsUserLogin() {
         // TODO Auto-generated constructor stub
     }
 
@@ -42,21 +41,37 @@ public class IsADLogin implements Filter {
 		// TODO Auto-generated method stub
 		// place your code here
 		HttpServletRequest rq = (HttpServletRequest) request;
-		HttpServletResponse rp = (HttpServletResponse) response;
-		HttpSession session =  rq.getSession();
-		
-		String email = request.getParameter("email") ;
-		String pass = request.getParameter("pass");
-		UserDTO isUserLogin = (UserDTO) session.getAttribute("User") ;		
-		session.setMaxInactiveInterval(900);		
-		if(email==null && pass==null && isUserLogin==null ) {
-			RequestDispatcher dp = request.getRequestDispatcher("Login.jsp");
+	    HttpSession session = rq.getSession();
+	    String URLLogin = "../SignInUp/SignIn_SignUp.jsp";
+	    UserDTO isUserLogin = (UserDTO) session.getAttribute("User");
+	    String email = request.getParameter("emailUser") ;
+	    session.setMaxInactiveInterval(900);
+	    
+	    String servletPath = rq.getServletPath();
+	   
+	   
+	    
+//	    if(isUserLogin == null && email ==null ) {
+//	    	if(servletPath.matches(".*(css|js|jpg|jpeg|png)")) {
+//	    		
+//				
+//	    	}
+//	    	RequestDispatcher dp = request.getRequestDispatcher(URLLogin);
+//			dp.forward(request, response);
+//	    }
+//	    else {
+//	    	
+//	    	chain.doFilter(request, response);
+//	    }
+	    
+	    if(servletPath.matches(".*(css|js|jpg|jpeg|png)") || isUserLogin != null || email!=null ){
+	    	chain.doFilter(request, response);
+	    }
+	    else {
+	    	RequestDispatcher dp = request.getRequestDispatcher(URLLogin);
 			dp.forward(request, response);
-		}
-		else {
-			// pass the request along the filter chain	
-			chain.doFilter(request, response);			
-		}		
+	    }
+		// pass the request along the filter chain`		
 	}
 
 	/**

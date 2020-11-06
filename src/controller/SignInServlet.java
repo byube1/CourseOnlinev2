@@ -37,7 +37,7 @@ public class SignInServlet extends HttpServlet {
             UserLogin(email, pass, request, response);
         } else {
             session.setAttribute("Error", "Check your format email");
-            response.sendRedirect("SignIn_SignUp.jsp");
+            response.sendRedirect("SignInUp/SignIn_SignUp.jsp");
         }
 
     }
@@ -47,7 +47,7 @@ public class SignInServlet extends HttpServlet {
         UserDAO handleLogin = new UserDAO();
         try {
             UserDTO user = handleLogin.Login(email, pass);
-            if (user.getName() == null || user.getType() != 1) {
+            if (user.getName() == null) {
                 session.setAttribute("Error", "Invalid login or password. Please try again.");
                 response.sendRedirect("SignIn_SignUp.jsp");
             } else {
