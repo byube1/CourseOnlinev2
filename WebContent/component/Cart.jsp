@@ -76,7 +76,8 @@
                     <td>${total }</td>
                     <td colspan="5" align="center">
                         <button type="button" class="btn btn-success">
-                            Accept
+                           <a style="text-decoration: none;color: white"
+                               href="./AcceptCartServlet">Accept</a>
                         </button>
                     </td>
                 </tr>

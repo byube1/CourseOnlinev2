@@ -76,12 +76,12 @@ public class CartServlet extends HttpServlet {
             if (index == -1) {
                 cart.add(new ShoppingCartItem(courseDao.find(request.getParameter("id")), 1));
             } else {
-                int quantity = cart.get(index).getQuantity() + 1;
+                int quantity = cart.get(index).getQuantity() + 0;
                 cart.get(index).setQuantity(quantity);
             }
             session.setAttribute("cart", cart);
         }
-        response.sendRedirect("CartServlet");
+        response.sendRedirect("component/HomePage.jsp");
     }
 
     private int isExisting(String id, List<ShoppingCartItem> cart) {

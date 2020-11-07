@@ -42,7 +42,6 @@
                     </form>
                     <%session.removeValue("Error");%>
                     
-
                     <form action="../SignUpServlet" class="sign-up-form" method="POST">
                        
                         <h2 class="title">Sign up</h2>
