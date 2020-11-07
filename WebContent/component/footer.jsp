@@ -53,15 +53,15 @@
 </div>
 
 
-<script src="../js1/back-to-top/main.js" type="text/javascript"></script>
-<script src="../js1/back-to-top/util.js" type="text/javascript"></script>
-<script src="../js1/VENOBOX/venobox.min.js" type="text/javascript"></script>
+<script src="js1/back-to-top/main.js" type="text/javascript"></script>
+<script src="js1/back-to-top/util.js" type="text/javascript"></script>
+<script src="js1/VENOBOX/venobox.min.js" type="text/javascript"></script>
 <script>
     $(document).ready(function () {
         $(".venobox").venobox();
     });
 </script>
-<script src="../js1/jquery.flurry.js" type="text/javascript"></script>
+<script src="js1/jquery.flurry.js" type="text/javascript"></script>
 <script>
     $("body").flurry();
 </script>

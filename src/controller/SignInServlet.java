@@ -21,7 +21,11 @@ import validation.valid;
 @WebServlet("/SignInServlet")
 public class SignInServlet extends HttpServlet {
 
-    public SignInServlet() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	public SignInServlet() {
         super();
     }
 
@@ -33,8 +37,10 @@ public class SignInServlet extends HttpServlet {
         HttpSession session = request.getSession();
         String email = request.getParameter("emailUser");
         String pass = request.getParameter("passUser");
+        
+        
         if (valid.checkformatEmail(email)) {
-            UserLogin(email, pass, request, response);
+            Login(email, pass, request, response);
         } else {
             session.setAttribute("Error", "Check your format email");
             response.sendRedirect("SignInUp/SignIn_SignUp.jsp");
@@ -42,25 +48,41 @@ public class SignInServlet extends HttpServlet {
 
     }
 
-    protected void UserLogin(String email, String pass, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void Login(String email, String pass, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         UserDAO handleLogin = new UserDAO();
         try {
             UserDTO user = handleLogin.Login(email, pass);
             if (user.getName() == null) {
                 session.setAttribute("Error", "Invalid login or password. Please try again.");
-                response.sendRedirect("SignIn_SignUp.jsp");
+                response.sendRedirect("SignInUp/SignIn_SignUp.jsp");
             } else {
-                session.setAttribute("User", user);
-                CategoryDAO cate = new CategoryDAO();
-                session.setAttribute("cloneCATE", cate.GetAllCates());
-                CourseDAO course = new CourseDAO();
-                session.setAttribute("cloneCOURSE", course.getAllCourses());
-                response.sendRedirect("component/HomePage.jsp");
+                if(user.getType()==1) {
+                	AdLogin(email, pass, session, user, response);
+                }
+                else {
+                	UserLogin(email, pass, session, user, response);
+                }
             }
         } catch (SQLException | NamingException e) {
             e.printStackTrace();
         }
     }
+    
+    protected void UserLogin(String email, String pass, HttpSession session,UserDTO user, HttpServletResponse response) throws IOException, NamingException, SQLException {
+    	 session.setAttribute("User", user);
+         CategoryDAO cate = new CategoryDAO();
+         session.setAttribute("cloneCATE", cate.GetAllCates());
+         CourseDAO course = new CourseDAO();
+         session.setAttribute("cloneCOURSE", course.getAllCourses());
+         response.sendRedirect("component/HomePage.jsp");
+    }   
+    protected void AdLogin(String email, String pass, HttpSession session,UserDTO user, HttpServletResponse response) throws IOException, NamingException, SQLException {   	                                                           	
+         session.setAttribute("User", user);
+         response.sendRedirect("ProjectADpage/index.jsp");                     
+   }
+    
+    
+    
 
 }

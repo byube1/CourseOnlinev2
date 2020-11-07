@@ -10,6 +10,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dto.UserDTO;
@@ -41,6 +42,7 @@ public class IsUserLogin implements Filter {
 		// TODO Auto-generated method stub
 		// place your code here
 		HttpServletRequest rq = (HttpServletRequest) request;
+		HttpServletResponse rp = (HttpServletResponse) response;
 	    HttpSession session = rq.getSession();
 	    String URLLogin = "../SignInUp/SignIn_SignUp.jsp";
 	    UserDTO isUserLogin = (UserDTO) session.getAttribute("User");
@@ -48,29 +50,18 @@ public class IsUserLogin implements Filter {
 	    session.setMaxInactiveInterval(900);
 	    
 	    String servletPath = rq.getServletPath();
-	   
-	   
-	    
-//	    if(isUserLogin == null && email ==null ) {
-//	    	if(servletPath.matches(".*(css|js|jpg|jpeg|png)")) {
-//	    		
-//				
-//	    	}
-//	    	RequestDispatcher dp = request.getRequestDispatcher(URLLogin);
-//			dp.forward(request, response);
-//	    }
-//	    else {
-//	    	
-//	    	chain.doFilter(request, response);
-//	    }
-	    
-	    if(servletPath.matches(".*(css|js|jpg|jpeg|png)") || isUserLogin != null || email!=null ){
+	       	   	
+	    if(servletPath.matches(".*(css|js|jpg|jpeg|png|svg)") || isUserLogin != null || email!=null ){
 	    	chain.doFilter(request, response);
 	    }
-	    else {
-	    	RequestDispatcher dp = request.getRequestDispatcher(URLLogin);
-			dp.forward(request, response);
+	    else if(servletPath.matches("/(SignInUp|component|ProjectADpage)/[a-zA-Z . _]+")) {		    	
+	    	RequestDispatcher dp = rq.getRequestDispatcher("/SignInUp/SignIn_SignUp.jsp");
+			dp.forward(rq, rp);
 	    }
+	    else {
+	    	RequestDispatcher dp = rq.getRequestDispatcher("ErrorPage/Error.jsp");
+			dp.forward(rq, rp);
+	    }	    
 		// pass the request along the filter chain`		
 	}
 
