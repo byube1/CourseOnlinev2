@@ -43,50 +43,29 @@ public class SignUpServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        String id = null;
-        String email = request.getParameter("emailU");
-        String pass = request.getParameter("passU");
-        String name = request.getParameter("nameU");
-        String img = null;
-        String phone = null;
-        String resgisterDate = null;
-        int type = 1;
-        UserDTO user = new UserDTO();
-        user.setId(id);
-        user.setEmail(email);
-        user.setPass(pass);
-        user.setName(name);
-        user.setImg(img);
-        user.setPhone(phone);
-        user.setResgisterDate(resgisterDate);
-        user.setType(type);
-        try {
-            dao.insectUser(user);
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        String email = request.getParameter("emailUser");
+        String pass = request.getParameter("passUser");
+        String name = request.getParameter("nameUser");
+        
+        if(valid.checkformatEmail(email)) {
+        	 UserDAO handleSignUp = new UserDAO();        
+             try {
+     			handleSignUp.SignIn(email, pass, name);
+     			session.setAttribute("SignUp", "SignUp successfully");
+     		} catch (SQLException e) {
+     			// TODO Auto-generated catch block
+     			session.setAttribute("Error", "Duplicate email");
+     			response.sendRedirect("SignInUp/SignUp_SignIn.jsp");
+     			e.printStackTrace();
+     		}       
+             response.sendRedirect("SignInUp/SignIn_SignUp.jsp");
         }
-        RequestDispatcher dis = request.getRequestDispatcher("SignIn_SignUp.jsp");
-        dis.forward(request, response);
-//        if (valid.checkformatEmail(email)) {
-//
-//            try {
-//                UserDTO u = new UserDTO();
-//                int count = new UserDAO().insectUser(u);
-//                if (count == 0) {
-//                    session.setAttribute("Errors", "sai");
-//                    response.sendRedirect("SignIn_SignUp.jsp");
-//                } else {
-//                    session.setAttribute("Errors", "Đúng");
-//                    response.sendRedirect("component/HomePage.jsp");
-//                }
-//            } catch (SQLException ex) {
-//                Logger.getLogger(SignUpServlet.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//
-//        } else {
-//            session.setAttribute("Errors", "Check your format email");
-//            response.sendRedirect("SignIn_SignUp.jsp");
-//        }
+        else {
+        	session.setAttribute("Error", "Check your format email");
+            response.sendRedirect("SignInUp/SignUp_SignIn.jsp");
+        }
+        
+       
     }
 
  

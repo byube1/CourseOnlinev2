@@ -165,6 +165,21 @@ public class UserDAO {
         }
         return result;
     }
+ 
+ public int SignIn(String email, String pass, String name) throws SQLException {
+		Connection cn = myConnection.makeConnection();
+		int result=0;
+		if(cn!=null) {
+			String sql = "INSERT INTO dbo.UserInformation ( email ,pass ,name ,registerDate) VALUES  ( ?,? ,? , GETDATE())";			
+			PreparedStatement pst = cn.prepareStatement(sql);
+			pst.setString(1,email);
+			pst.setString(2,pass);
+			pst.setString(3, name);			
+			result=pst.executeUpdate();
+			cn.close();			
+		}		
+		return result;
+	}	
 
 //	public static void main(String[] args) {
 //		try {

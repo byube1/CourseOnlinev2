@@ -18,18 +18,16 @@
 
     </head>
     <body>
-        <div class="container">
+        <div class="container sign-up-mode">
             <div class="forms-container">
                 <div class="signin-signup">
                 
                 
-                    <form action="../SignInServlet" class="sign-in-form" method="POST">
-                      <h4 style="color: red;"> ${SignUp}</h4>
-                        <%session.removeValue("SignUp");%>
+                     <form action="../SignInServlet" class="sign-in-form" method="POST">
                         <h2 class="title">Sign in</h2>
                         <div class="input-field">
                             <i class="fas fa-envelope"></i>
-                            <input type="email" placeholder="Email" name="emailUser"  required/>
+                            <input type="email" placeholder="Email" name="emailUser" required />
                         </div>
                         <div class="input-field">
                             <i class="fas fa-lock"></i>
@@ -38,18 +36,21 @@
                         <p style="text-align: center; color: red;">
                             <%=(session.getAttribute("Error") == null) ? "" : session.getAttribute("Error")%>
                         </p>
-                        <input type="submit" value="Login" class="btn solid" required />
+                        <input type="submit" value="Login" class="btn solid"  />
                     </form>
                     <%session.removeValue("Error");%>
                     
 
                     <form action="../SignUpServlet" class="sign-up-form" method="POST">
-                       
+                     
                         <h2 class="title">Sign up</h2>
 
                         <div class="input-field">
                             <i class="fas fa-envelope"></i>
                             <input type="email" placeholder="Email" name="emailUser" required/>
+                             <p style="text-align: center; color: red;">
+                            <%=(session.getAttribute("Error") == null) ? "" : session.getAttribute("Error")%>
+                        </p>
                         </div>
                         <div class="input-field">
                             <i class="fas fa-lock"></i>
@@ -64,6 +65,9 @@
                         </p>
                         <input type="submit" class="btn" value="Sign up" />
                     </form>
+                     <%session.removeValue("Error");%>
+                    
+                   
                     
                     
                 </div>

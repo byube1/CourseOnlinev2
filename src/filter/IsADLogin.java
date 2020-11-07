@@ -18,7 +18,7 @@ import dto.UserDTO;
 /**
  * Servlet Filter implementation class isLoginRole
  */
-@WebFilter("/ProjectADpage/*")
+//@WebFilter("/ProjectADpage/*")
 public class IsADLogin implements Filter {
     /**
      * Default constructor. 

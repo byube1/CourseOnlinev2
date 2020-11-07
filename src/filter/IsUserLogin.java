@@ -18,7 +18,7 @@ import dto.UserDTO;
 /**
  * Servlet Filter implementation class IsUserLogin
  */
-@WebFilter("/*")
+//@WebFilter("/*")
 public class IsUserLogin implements Filter {
 
     /**
@@ -51,7 +51,7 @@ public class IsUserLogin implements Filter {
 	    
 	    String servletPath = rq.getServletPath();
 	       	   	
-	    if(servletPath.matches(".*(css|js|jpg|jpeg|png|svg)") || isUserLogin != null || email!=null ){
+	    if(servletPath.matches(".*(css|js|jpg|jpeg|png|svg)") || isUserLogin != null || email!=null || servletPath.matches("/SignInUp/SignUp_SignIn.jsp")){
 	    	chain.doFilter(request, response);
 	    }
 	    else if(servletPath.matches("/(SignInUp|component|ProjectADpage)/[a-zA-Z . _]+")) {		    	
