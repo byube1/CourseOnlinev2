@@ -12,7 +12,7 @@
             <img
                 class="w-100"
                 style="max-width: 100%; height: 880px"
-                src="../img1/nav3.jpg"
+                src="https://oes.vn/wp-content/uploads/2020/09/tips-thiet-ke-mot-he-thong-lms-trong-hoc-truc-tuyen.png"
                 alt="Los Angeles"
                 />
         </div>
@@ -20,7 +20,7 @@
             <img
                 class="w-100"
                 style="max-width: 100%; height: 880px"
-                src="../img1/nav2.jpg"
+                src="https://www.talentlms.com/blog/wp-content/uploads/2019/03/Rules-new-eLearning-professionals-should-follow.png"
                 alt="Los Angeles"
                 />
         </div>
@@ -28,7 +28,7 @@
             <img
                 class="w-100"
                 style="max-width: 100%; height: 880px"
-                src="../img1/nav7.png"
+                src="https://elearningindustry.com/wp-content/uploads/2016/10/4-ways-habit-change-elearning.png"
                 alt="Los Angeles"
                 />
         </div>

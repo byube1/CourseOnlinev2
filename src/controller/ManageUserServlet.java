@@ -19,7 +19,7 @@ import validation.valid;
  * Servlet implementation class ManageUserServlet
  */
 @WebServlet(urlPatterns = {"/ManageUserServlet", "/ManageUserServlet/show", "/ManageUserServlet/detail",
-		                   "/ManageUserServlet/update","/ManageUserServlet/delete"})
+    "/ManageUserServlet/update", "/ManageUserServlet/delete"})
 public class ManageUserServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
@@ -42,7 +42,7 @@ public class ManageUserServlet extends HttpServlet {
         }
         return listUser;
     }
-    
+
     protected ArrayList<UserDTO> getlistUser(String Email) {
         ArrayList<UserDTO> listUser = null;
         try {
@@ -79,9 +79,9 @@ public class ManageUserServlet extends HttpServlet {
                 Update(request, response);
                 break;
             }
-            case "/ManageUserServlet/delete":{
-            	DeleteUser(request, response);
-            }           
+            case "/ManageUserServlet/delete": {
+                DeleteUser(request, response);
+            }
             default:
                 break;
         }
@@ -99,9 +99,9 @@ public class ManageUserServlet extends HttpServlet {
     protected void ShowlistUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
         HttpSession session = request.getSession();
-        
+
         UserDTO user = (UserDTO) session.getAttribute("User");
-        
+
         ArrayList<UserDTO> listUser = getlistUser(user.getEmail());
         session.setAttribute("ListUser", listUser);
         response.sendRedirect("../ProjectADpage/userTB.jsp");
@@ -125,37 +125,43 @@ public class ManageUserServlet extends HttpServlet {
         String phone = request.getParameter("phone");
         String img = request.getParameter("img");
         int type = Integer.parseInt(request.getParameter("type"));
-        
-//        Check valib
-        
-     
-//        return client
 
+//        Check valib
+//        return client
         HttpSession session = request.getSession();
         UserDAO handleUpdate = new UserDAO();
-        try {
-            handleUpdate.updateUser(id, name, pass, phone, type, img);
-            session.setAttribute("Report", "Successfully");
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            session.setAttribute("Report", "Cannot update, try again!!");
-            e.printStackTrace();
+        if (!valid.checkLengthText(name, 30)) {
+            session.setAttribute("ErrorName", "Name (Max length: 30) ");
+        } else if (!valid.checkformatPhone(phone)) {
+            session.setAttribute("ErrorPhone", "Phone is number (8 -> 15) ");
+        } else if (!valid.checkLengthText(pass, 30)) {
+            session.setAttribute("ErrorPass", "Password (Max length: 30) ");
+        } else {
+            try {
+                handleUpdate.updateUser(id, name, pass, phone, type, img);
+                session.setAttribute("Report", "Successfully");
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                session.setAttribute("Report", "Cannot update, try again!!");
+                e.printStackTrace();
+            }
         }
+
         response.sendRedirect("detail?ID=" + id);
     }
-    
+
     protected void DeleteUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
-    	String id = request.getParameter("ID");
-    	UserDAO handleDelete = new UserDAO();    	  	
-    	try {
-			handleDelete.banUser(id);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	 response.sendRedirect("show");
-    	
+        String id = request.getParameter("ID");
+        UserDAO handleDelete = new UserDAO();
+        try {
+            handleDelete.banUser(id);
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        response.sendRedirect("show");
+
     }
 
 }

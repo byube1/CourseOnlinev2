@@ -21,10 +21,10 @@
         <div class="container">
             <div class="forms-container">
                 <div class="signin-signup">
-                
-                
+
+
                     <form action="../SignInServlet" class="sign-in-form" method="POST">
-                      <h4 style="color: red;"> ${SignUp}</h4>
+                        <h4 style="color: red;"> ${SignUp}</h4>
                         <%session.removeValue("SignUp");%>
                         <h2 class="title">Sign in</h2>
                         <div class="input-field">
@@ -40,12 +40,12 @@
                         </p>
                         <input type="submit" value="Login" class="btn solid" required />
                     </form>
-                   
-                    
-                    
-                    
+
+
+
+
                     <form action="../SignUpServlet" class="sign-up-form" method="POST">
-                       
+
                         <h2 class="title">Sign up</h2>
 
                         <div class="input-field">
@@ -61,12 +61,12 @@
                             <input type="text" placeholder="Username"  name="nameUser" required/>
                         </div>
                         <p style="text-align: center; color: red;">
-                          
+
                         </p>
                         <input type="submit" class="btn" value="Sign up" />
                     </form>
-                    
-                    
+
+
                 </div>
             </div>
 
@@ -82,7 +82,8 @@
                             Sign up
                         </button>
                     </div>
-                    <img src="#" class="image" alt="" />
+
+                    <img src="../img1/log.svg" class="image" alt="" />
                 </div>
                 <div class="panel right-panel">
                     <div class="content">
@@ -95,7 +96,8 @@
                             Sign in
                         </button>
                     </div>
-                    <img src="#" class="image" alt="" />
+
+                    <img src="../img1/register.svg" class="image" alt="" />
                 </div>
             </div>
         </div>
