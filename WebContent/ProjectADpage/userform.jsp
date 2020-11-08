@@ -105,31 +105,7 @@
                                 <input class="form-control" type="text" id="account-pass" name="img" value="${DetailUser.getImg()}" >
                             </div>
                         </div>
-                        <div class="col-md-12 container">
-                            <h5>List course</h5>
-                            <table class="table table-sm bg-light ">
-                                <thead>
-                                  <tr>
-                                    <th scope="col">ID</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Date</th>
-                                    <th scope="col">Option</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr>
-                                    <th scope="row">1</th>
-                                    <td>Mark</td>
-                                    <td>Otto</td> 
-                                    <td>
-                                        <div class="Option">                                     
-                                          <a class="m-2" href="#"><i class="fa fa-times fa-lg"></i></a>
-                                        </div>                                                          
-                                      </td>                              
-                                  </tr>                            
-                                </tbody>
-                              </table>
-                        </div>
+                        
                         <div class="col-12">
                             <hr class="mt-2 mb-3">
                             <div class="d-flex flex-wrap justify-content-between align-items-center">

@@ -7,6 +7,8 @@ package dao;
 
 import connection.myConnection;
 import dto.CourseDTO;
+import dto.CourseofUserDTO;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -71,6 +73,85 @@ public class CourseDAO {
 
                     CourseDTO p = new CourseDTO(id, idCate, name, time, certificate, Description, price, num, imgURL);
                     lst.add(p);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (pstm != null) {
+                pstm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return lst;
+    }
+    
+    public ArrayList<CourseDTO> getAllCourses(int UserID) throws NamingException, SQLException {
+        Connection con = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        String sql = "SELECT * FROM dbo.Course WHERE courseID NOT IN (SELECT courseID \r\n" + 
+        		"FROM dbo.OrderDetail JOIN dbo.[Order] ON [Order].idOrder = OrderDetail.idOrder WHERE userID = ?)";
+        ArrayList<CourseDTO> lst = new ArrayList<>();
+        try {
+            con = myConnection.makeConnection();
+            if (con != null) {
+                pstm = con.prepareStatement(sql);
+                pstm.setInt(1, UserID);
+                rs = pstm.executeQuery();
+
+                while (rs.next()) {
+                    String id = rs.getString("courseID");
+                    String idCate = rs.getString("CategoryID");
+                    String name = rs.getString("courseName");
+                    String time = rs.getString("courseTime");
+                    String certificate = rs.getString("certificate");
+                    String Description = rs.getString("courseDescription");
+                    double price = rs.getDouble("coursePrice");
+                    int num = rs.getInt("numberOfStudent");
+                    String imgURL = rs.getString("img");
+
+                    CourseDTO p = new CourseDTO(id, idCate, name, time, certificate, Description, price, num, imgURL);
+                    lst.add(p);
+                }
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (pstm != null) {
+                pstm.close();
+            }
+            if (con != null) {
+                con.close();
+            }
+        }
+        return lst;
+    }
+    
+    public ArrayList<CourseofUserDTO> getCourseofUser(int UserID) throws NamingException, SQLException {
+        Connection con = null;
+        PreparedStatement pstm = null;
+        ResultSet rs = null;
+        String sql = "SELECT courseName,dateOrder FROM dbo.OrderDetail JOIN dbo.[Order] ON\r\n" + 
+        		" [Order].idOrder = OrderDetail.idOrder INNER JOIN dbo.Course ON\r\n" + 
+        		" Course.courseID = OrderDetail.courseID WHERE userID = ?";
+        ArrayList<CourseofUserDTO> lst = new ArrayList<>();
+        try {
+            con = myConnection.makeConnection();
+            if (con != null) {
+                pstm = con.prepareStatement(sql);
+                pstm.setInt(1, UserID);
+                rs = pstm.executeQuery();
+
+                while (rs.next()) {
+                    String CourseName = rs.getString("courseName");
+                    String Date = rs.getString("dateOrder");                    
+                    CourseofUserDTO listUCourse = new CourseofUserDTO(CourseName, Date);               
+                    lst.add(listUCourse);
                 }
             }
         } finally {

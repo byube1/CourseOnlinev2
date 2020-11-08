@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,8 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dao.CartDAO;
 import dto.ShoppingCartItem;
 import dto.UserDTO;
+import tool.Tool;
 
 /**
  * Servlet implementation class AccpetCartServlet
@@ -34,20 +37,46 @@ public class AcceptCartServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		
-		 HttpSession session = request.getSession();
+		HttpSession session = request.getSession(); 
 		 List<ShoppingCartItem> UserCart = (List<ShoppingCartItem>) session.getAttribute("cart");
 		 UserDTO thisUser = (UserDTO) session.getAttribute("User");
 		 
-		 System.out.println(thisUser.getName());
-		for (ShoppingCartItem shoppingCartItem : UserCart) {
-			System.out.println(shoppingCartItem.getCourse().getCourseName());
-			
-		}
-		
-		response.sendRedirect("component/HomePage.jsp");
+		 //neu gio hang trong
 		 
+		 if(UserCart.isEmpty()) {
+			 response.sendRedirect("component/HomePage.jsp");
+		 }		 
+		 else {
+			 AcceptBuy(thisUser, UserCart, request, response);
+		 }		 					
 		
-		
+	}
+	
+	protected void AcceptBuy(UserDTO thisUser,List<ShoppingCartItem> UserCart,HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession(); 
+		String OrderID =Tool.AutoCreateID("OD");
+		 float total =0;
+		 for (ShoppingCartItem Item : UserCart) {
+			total+= Item.getCourse().getCoursePrice();
+		}
+		 
+		 
+		 CartDAO handleAccept = new CartDAO();
+		 try {
+			handleAccept.Order(OrderID,Integer.parseInt(thisUser.getId()),total);
+			 for (ShoppingCartItem Item : UserCart) {				 
+				 handleAccept.OrderDetail(OrderID, Item.getCourse().getCourseID());
+			}
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 
+		session.removeAttribute("cart");		 		
+		response.sendRedirect("component/HomePage.jsp");
 	}
 
 	/**

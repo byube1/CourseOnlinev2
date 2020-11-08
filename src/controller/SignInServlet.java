@@ -74,7 +74,9 @@ public class SignInServlet extends HttpServlet {
          CategoryDAO cate = new CategoryDAO();
          session.setAttribute("cloneCATE", cate.GetAllCates());
          CourseDAO course = new CourseDAO();
-         session.setAttribute("cloneCOURSE", course.getAllCourses());
+//         ****
+         session.setAttribute("cloneCOURSE", course.getAllCourses(Integer.parseInt(user.getId())));
+         session.setAttribute("CourseOfUser", course.getCourseofUser((Integer.parseInt(user.getId()))));
          response.sendRedirect("component/HomePage.jsp");
     }   
     protected void AdLogin(String email, String pass, HttpSession session,UserDTO user, HttpServletResponse response) throws IOException, NamingException, SQLException {   	                                                           	
