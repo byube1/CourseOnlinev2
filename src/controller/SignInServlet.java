@@ -2,6 +2,8 @@ package controller;
 
 import dao.CategoryDAO;
 import dao.CourseDAO;
+import dao.DashboardDAO;
+
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -13,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.UserDAO;
+import dto.DashboardDTO;
 import dto.UserDTO;
 
 import javax.naming.NamingException;
@@ -63,6 +66,7 @@ public class SignInServlet extends HttpServlet {
                 else {
                 	UserLogin(email, pass, session, user, response);
                 }
+                session.removeAttribute("Error");
             }
         } catch (SQLException | NamingException e) {
             e.printStackTrace();
@@ -81,7 +85,9 @@ public class SignInServlet extends HttpServlet {
     }   
     protected void AdLogin(String email, String pass, HttpSession session,UserDTO user, HttpServletResponse response) throws IOException, NamingException, SQLException {   	                                                           	
          session.setAttribute("User", user);
-         response.sendRedirect("ProjectADpage/index.jsp");                     
+         DashboardDTO dashboard = DashboardDAO.GetInfomationWeb();
+         session.setAttribute("Dashboard", dashboard);        
+         response.sendRedirect("DashboardServlet");                     
    }
     
     

@@ -33,24 +33,22 @@
                             <i class="fas fa-lock"></i>
                             <input type="password" placeholder="Password" name="passUser" required/>
                         </div>
-                        <p style="text-align: center; color: red;">
-                            <%=(session.getAttribute("Error") == null) ? "" : session.getAttribute("Error")%>
-                        </p>
+                        
                         <input type="submit" value="Login" class="btn solid"  />
-                    </form>
-                    <%session.removeValue("Error");%>
+                    </form>                   
                     
 
                     <form action="../SignUpServlet" class="sign-up-form" method="POST">
+                     <p style="text-align: center; color: red;">
+                            <%=(session.getAttribute("Error") == null) ? "" : session.getAttribute("Error")%>
+                        </p>                                              
                      
                         <h2 class="title">Sign up</h2>
 
                         <div class="input-field">
                             <i class="fas fa-envelope"></i>
                             <input type="email" placeholder="Email" name="emailUser" required/>
-                             <p style="text-align: center; color: red;">
-                            <%=(session.getAttribute("Error") == null) ? "" : session.getAttribute("Error")%>
-                        </p>
+                            
                         </div>
                         <div class="input-field">
                             <i class="fas fa-lock"></i>
@@ -65,7 +63,8 @@
                         </p>
                         <input type="submit" class="btn" value="Sign up" />
                     </form>
-                     <%session.removeValue("Error");%>
+                    
+                   
                     
                    
                     
@@ -103,5 +102,6 @@
             </div>
         </div>
         <script src="js1/main.js" type="text/javascript"></script>
+         
     </body>
 </html>

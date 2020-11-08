@@ -48,24 +48,45 @@ public class SignUpServlet extends HttpServlet {
         String name = request.getParameter("nameUser");
         
         if(valid.checkformatEmail(email)) {
-        	 UserDAO handleSignUp = new UserDAO();        
-             try {
-     			handleSignUp.SignIn(email, pass, name);
-     			session.setAttribute("SignUp", "SignUp successfully");
-     		} catch (SQLException e) {
-     			// TODO Auto-generated catch block
-     			session.setAttribute("Error", "Duplicate email");
-     			response.sendRedirect("SignInUp/SignUp_SignIn.jsp");
-     			e.printStackTrace();
-     		}       
-             response.sendRedirect("SignInUp/SignIn_SignUp.jsp");
+        	 UserDAO handleSignUp = new UserDAO();
+        	try {
+				if(isEmailexist(handleSignUp, email)) {
+					session.setAttribute("Error", "The Email was registered");
+					response.sendRedirect("SignInUp/SignUp_SignIn.jsp");			
+				}
+				else {
+					Signup(handleSignUp, email, pass, name, request, response);							
+				}
+			} catch (SQLException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+             
         }
         else {
         	session.setAttribute("Error", "Check your format email");
             response.sendRedirect("SignInUp/SignUp_SignIn.jsp");
-        }
-        
-       
+        }               
+    }
+    
+    protected void Signup( UserDAO handleSignUp,String email,String pass, String name,HttpServletRequest request, HttpServletResponse response) throws IOException {    	
+    	 HttpSession session = request.getSession();
+    	try {
+ 			handleSignUp.SignIn(email, pass, name);
+ 			session.setAttribute("SignUp", "SignUp successfully");
+ 			session.removeAttribute("Error");
+ 		} catch (SQLException e) {
+ 			// TODO Auto-generated catch block			
+ 			e.printStackTrace();
+ 		}       
+         response.sendRedirect("SignInUp/SignIn_SignUp.jsp"); 	
+    }
+    
+    protected boolean isEmailexist(UserDAO handleSignUp,String email) throws SQLException {
+    	if(handleSignUp.EmailExist(email)==null || handleSignUp.EmailExist(email).size()==0 ) {  		
+    		return false;	
+    	}
+    	return true;
     }
 
  

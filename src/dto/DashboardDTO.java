@@ -35,6 +35,13 @@ public class DashboardDTO {
 		this.numberOrder = numberOrder;
 		this.totalEarning = totalEarning;
 	}
+	@Override
+	public String toString() {
+		return "DashboardDTO [numberUser=" + numberUser + ", numberCourse=" + numberCourse + ", numberOrder="
+				+ numberOrder + ", totalEarning=" + totalEarning + "]";
+	}
+	
+	
 	
 	
 	

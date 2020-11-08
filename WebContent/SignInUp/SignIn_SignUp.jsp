@@ -40,7 +40,9 @@
                         </p>
                         <input type="submit" value="Login" class="btn solid" required />
                     </form>
-                    <%session.removeValue("Error");%>
+                   
+                    
+                    
                     
                     <form action="../SignUpServlet" class="sign-up-form" method="POST">
                        
@@ -59,7 +61,7 @@
                             <input type="text" placeholder="Username"  name="nameUser" required/>
                         </div>
                         <p style="text-align: center; color: red;">
-                            <%=(session.getAttribute("Errors") == null) ? "" : session.getAttribute("Errors")%>
+                          
                         </p>
                         <input type="submit" class="btn" value="Sign up" />
                     </form>
