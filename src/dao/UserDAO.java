@@ -24,7 +24,7 @@ public class UserDAO {
                     + "      ,[imgUrl]\n"
                     + "      ,[phone]\n"
                     + "      ,[registerDate]\n"
-                    + "  FROM [AssignmentJavaWeb].[dbo].[UserInformation] WHERE email = ? AND pass=?";
+                    + "  FROM [AssignmentJavaWeb].[dbo].[UserInformation] WHERE email = ? AND pass=? AND status = 'activate' ";
             PreparedStatement pst = cn.prepareStatement(sql);
             pst.setString(1, User);
             pst.setString(2, pass);
@@ -84,7 +84,7 @@ public class UserDAO {
         ArrayList<UserDTO> listUser = new ArrayList<UserDTO>();
         Connection cn = myConnection.makeConnection();
         if (cn != null) {
-            String sql = "SELECT * FROM dbo.UserInformation WHERE email <> ?";
+            String sql = "SELECT * FROM dbo.UserInformation WHERE email <> ? AND status = 'activate'";
             
             PreparedStatement pst = cn.prepareStatement(sql);
             pst.setString(1, email);
@@ -130,6 +130,20 @@ public class UserDAO {
 		int result=0;
 		if(cn!=null) {
 			String sql = "DELETE dbo.UserInformation WHERE userID = ?";			
+			PreparedStatement pst = cn.prepareStatement(sql);		
+			pst.setString(1,Code);
+			result=pst.executeUpdate();
+			cn.close();			
+		}
+		cn.close();
+		return result;
+	}
+    
+    public static int banUser(String Code) throws SQLException {
+		Connection cn = myConnection.makeConnection();
+		int result=0;
+		if(cn!=null) {
+			String sql = " UPDATE dbo.UserInformation SET status= 'ban' WHERE userID =?";			
 			PreparedStatement pst = cn.prepareStatement(sql);		
 			pst.setString(1,Code);
 			result=pst.executeUpdate();

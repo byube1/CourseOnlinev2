@@ -149,7 +149,7 @@ public class ManageUserServlet extends HttpServlet {
     	String id = request.getParameter("ID");
     	UserDAO handleDelete = new UserDAO();    	  	
     	try {
-			handleDelete.deleteUser(id);
+			handleDelete.banUser(id);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

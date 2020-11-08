@@ -45,7 +45,7 @@
 			<!-- Sidebar - Brand -->
 			<a
 				class="sidebar-brand d-flex align-items-center justify-content-center"
-				href="index.html">
+				href="index.jsp">
 				<div class="sidebar-brand-icon rotate-n-15">
 					<i class="fas fa-laugh-wink"></i>
 				</div>
@@ -71,7 +71,7 @@
 
 			<!-- Nav Item - Manage User -->
 			<li class="nav-item active"><a class="nav-link"
-				href="userTB.jsp"> <i class="far fa-user"></i> <span>Manage
+				href="../ManageUserServlet/show"> <i class="far fa-user"></i> <span>Manage
 						User</span></a></li>
 
 			<!-- Nav Item - Manage Course -->
@@ -307,7 +307,7 @@
 											<th>ID</th>
 											<th>Email</th>
 											<th>Name</th>
-											<th>Type</th>
+											<th>Role</th>
 											<th>Phone</th>
 											<th>Register Date</th>
 											<th>Option</th>

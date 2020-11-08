@@ -62,7 +62,7 @@
 
       <!-- Nav Item - Manage User -->
       <li class="nav-item">
-        <a class="nav-link" href="userTB.jsp">
+        <a class="nav-link" href="../ManageUserServlet/show">
           <i class="far fa-user"></i>
           <span>Manage User</span></a>
       </li>
@@ -70,7 +70,7 @@
       <!-- Nav Item - Manage Course -->
 
       <li class="nav-item active">
-        <a class="nav-link" href="courseTB.jsp">
+        <a class="nav-link" href="../ManageCourseServlet/show">
           <i class="fas fa-fw fa-table"></i>
           <span>Manage Course</span></a>
       </li>
@@ -288,7 +288,7 @@
                     <tr>
                       <th>Course ID</th>
                       <th>Course Name</th>
-                      <th>Major</th>
+                     
                       <th>Description</th>
                       <th>Date create</th>
                       <th>Price</th>
@@ -304,10 +304,10 @@
                       <c:set var = "name" value = "${fn:substring(Course.getCourseName(),0,20)}" />
                       ${name}...
                       </td>
-                      <td>${Course.getCategoryName()}</td>
+                      
                       <td>
                       <c:set var = "desc" value = "${fn:substring(Course.getCourseDescription(),0,40)}" />
-                      ${desc}...
+                       ${desc}...
                       </td>
                       <td>${Course.getCourseTime()}</td>
                       <td>${Course.getCoursePrice()}$</td>
