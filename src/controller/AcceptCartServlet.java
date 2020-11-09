@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.CartDAO;
+import dao.CourseDAO;
 import dto.ShoppingCartItem;
 import dto.UserDTO;
 import tool.Tool;
@@ -67,14 +69,18 @@ public class AcceptCartServlet extends HttpServlet {
 			 for (ShoppingCartItem Item : UserCart) {				 
 				 handleAccept.OrderDetail(OrderID, Item.getCourse().getCourseID());
 			}
+			 CourseDAO course = new CourseDAO();
+			 session.setAttribute("CourseOfUser", course.getCourseofUser((Integer.parseInt(thisUser.getId()))));
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (NamingException e) {
+			// TODO: handle exception
 		}
-		 
+		
 		session.removeAttribute("cart");		 		
 		response.sendRedirect("component/HomePage.jsp");
 	}
